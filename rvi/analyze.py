@@ -167,9 +167,15 @@ def analyze_video(path, source_manifest=None):
 
     pts, types, ts_err = read_timestamps(path)
     thumbs, dec_err, dec_code = decode_thumbnails(path)
+    # Messages from ffmpeg's OUTPUT muxer (our thumbnail pipe) are not source defects: with
+    # irregular phone timestamps two frames can round to the same output DTS. Keep them
+    # visible as pipeline notes, but never let them mark the source file as damaged.
+    notes = [l for l in dec_err if "to muxer" in l]
+    dec_err = [l for l in dec_err if "to muxer" not in l]
     errors = list(dict.fromkeys(dec_err + ts_err))
     res["decode"] = {"frames_decoded": len(thumbs), "frames_with_timestamps": len(pts),
-                     "error_count": len(dec_err), "errors": errors[:40], "exit_code": dec_code}
+                     "error_count": len(dec_err), "errors": errors[:40], "exit_code": dec_code,
+                     "pipeline_notes": notes[:20]}
     if not thumbs or not pts:
         res["validation"] = {"status": "INVALID", "reason": "container parsed but no frame could be decoded",
                              "errors": errors[:40]}

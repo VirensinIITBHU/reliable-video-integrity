@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Integrity report</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><style>
+body{font-family:system-ui,sans-serif;margin:24px;color:#222;max-width:1000px}
+h1{font-size:22px}h2{font-size:16px;margin-top:28px;border-bottom:1px solid #ddd;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border:1px solid #ddd;padding:6px;text-align:left;vertical-align:top}
+th{background:#f5f5f5}.v{display:inline-block;padding:6px 12px;border-radius:6px;color:#fff;font-weight:600;background:#2ca02c}
+.chip{display:inline-block;width:10px;height:10px;margin:0 4px 0 12px}.kv td:first-child{width:220px;color:#555}
+svg{width:100%;height:auto;background:#fafafa;border:1px solid #ddd}li{margin:4px 0;font-size:13px}code{font-size:12px}
+</style></head><body>
+<h1>Video integrity report</h1><p><span class="v">NO_ANOMALIES_DETECTED</span> &nbsp; generated 2026-11-15T17:00:28.570Z</p>
+<h2>1. Transfer</h2><table class="kv">
+<tr><td>Status</td><td><b>VERIFIED_BYTE_PERFECT</b></td></tr><tr><td>File</td><td>VID_20261115_215804856.mp4 (64103134 bytes, 245 chunks)</td></tr>
+<tr><td>SHA-256</td><td><code>b61cba4879668f6da2ad5bd60dfe6d1d6528142e454fa262f960060087114bb9</code></td></tr><tr><td>Server counters</td><td>chunk ok=245, chunk duplicate=0, chunk hash mismatch=0, chunk incomplete body=12, finalize refused=0</td></tr>
+<tr><td>What this proves</td><td>Every chunk and the whole file matched the client&#x27;s SHA-256. Any issue reported below therefore existed in the source file and is NOT a transfer error.</td></tr></table>
+<h2>2. Validation and decode</h2><table class="kv">
+<tr><td>Validation</td><td><b>VALID</b> — decoded cleanly</td></tr><tr><td>Container / codec</td><td>mov,mp4,m4a,3gp,3g2,mj2 / h264 1920x1080</td></tr>
+<tr><td>Frames decoded</td><td>952</td></tr><tr><td>Decoder error lines</td><td>0</td></tr>
+<tr><td>Reference (client pre-upload probe)</td><td>backend decodes the same number of frames the client had before upload: every anomaly above pre-dates the transfer</td></tr></table>
+<h2>3. 30 FPS sampling</h2><table class="kv">
+<tr><td>30 FPS slots</td><td>952</td></tr><tr><td>Slots with their own source frame</td><td>952</td></tr>
+<tr><td>Slots with no source frame (real gaps)</td><td>0</td></tr>
+<tr><td>Repeats / omissions caused only by conversion</td><td>0 repeated, 0 omitted (not anomalies)</td></tr></table>
+<h2>4. Anomaly timeline</h2><svg viewBox="0 0 900 58"><rect x="0" y="6" width="900" height="28" fill="#e8f5e9"/><text x="0" y="52" font-size="10" fill="#666" text-anchor="start">0s</text><text x="141" y="52" font-size="10" fill="#666" text-anchor="middle">5s</text><text x="283" y="52" font-size="10" fill="#666" text-anchor="middle">10s</text><text x="425" y="52" font-size="10" fill="#666" text-anchor="middle">15s</text><text x="567" y="52" font-size="10" fill="#666" text-anchor="middle">20s</text><text x="709" y="52" font-size="10" fill="#666" text-anchor="middle">25s</text><text x="851" y="52" font-size="10" fill="#666" text-anchor="middle">30s</text></svg>
+<p style="font-size:12px"><span class="chip" style="background:#d62728"></span>missing_frames <span class="chip" style="background:#1f77b4"></span>duplicated_frames <span class="chip" style="background:#7f3b08"></span>truncated_stream <span class="chip" style="background:#ff9f1c"></span>motion_discontinuity <span class="chip" style="background:#9467bd"></span>non_monotonic_timestamps <span class="chip" style="background:#8c564b"></span>undecodable_frames</p>
+<h2>5. Anomalies (0)</h2><table><tr><th>Type</th><th>Count</th><th>Time (s)</th><th>Source frames</th><th>Confidence</th><th>Evidence</th><th>Attributed cause</th></tr><tr><td colspan="7">No anomalies detected.</td></tr></table>
+<h2>6. Warnings</h2><ul><li><b>duration_out_of_spec</b>: video spans 31.72s, expected 30s</li></ul><h2>7. Limitations</h2><ul><li>Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.</li><li>If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.</li><li>Duplicate detection compares 32x18 grayscale thumbnails; very subtle motion can look identical.</li></ul>
+</body></html>

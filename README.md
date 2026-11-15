@@ -96,18 +96,27 @@ transfer logs in `evidence/transfer_logs/` (each with the signal-strength trace
 the proxy applied), and sample integrity reports in `evidence/reports/`
 (open `dropped_vfr.report.html`, or `12943168_1440_2560_30fps.report.html` for real footage).
 
-The committed evidence is a 21/21 run: 11 transfer scenarios (T1–T10, T8b),
-7 ground-truth video scenarios (V1–V7) and 3 real clips (R1–R3).
+The committed evidence is a 25/25 run: 11 transfer scenarios (T1–T10, T8b),
+7 ground-truth video scenarios (V1–V7) and 7 real clips (R1–R7).
+
+See [`WRITEUP.md`](WRITEUP.md) for a one-page summary and a checklist against the problem statement.
 
 Detection is measured against generated videos with known injected faults:
 4/4 dropped-frame gaps and 3/3 duplicate runs located, 0 false alarms, 0 on the clean video.
 
-**Real footage (R1–R3).** Three real 30 FPS camera clips (1440×2560 / 30.2 s / 92 MB,
-720×1280 / 30.4 s, 1080×1920 / 11.2 s) were each uploaded through the fluctuating
-proxy and analysed. All three transferred byte-perfect and decoded cleanly with
-**0 confirmed anomalies**. The 11.2 s clip is correctly flagged `duration_out_of_spec`.
-The clips are third-party footage and are not committed (`samples/` is git-ignored);
-their reports are in `evidence/reports/`. Put any `.mp4` in `samples/` to repeat this.
+**Real footage (R1–R7).** Seven real clips were each uploaded through the fluctuating
+proxy and analysed: three stock clips (R1–R3) and four phone recordings (R4–R7).
+All seven transferred byte-perfect and decoded cleanly.
+
+- Stock clips: **0 confirmed anomalies**; the 11.2 s clip is correctly flagged `duration_out_of_spec`.
+- Phone recordings (variable frame rate): container timestamps reveal real capture drops: a
+  **1.67 s hole (49 frames) at 1.67–3.30 s** in R5, and 10 single-frame holes across R4, R5, R7.
+  These are attributed to capture/encoding, because the transfer was byte-verified. R6 is clean.
+
+Real clips have no ground truth, so their scenarios check that the pipeline is sound (byte-perfect,
+decodable, every confirmed anomaly backed by timestamp/metadata/decoder evidence), not that the
+clip is clean. The clips are not committed (`samples/` is git-ignored); their reports are in
+`evidence/reports/`. Put any `.mp4` in `samples/` to repeat this.
 
 Real footage changed two thresholds that synthetic video could not reveal:
 
@@ -115,6 +124,7 @@ Real footage changed two thresholds that synthetic video could not reveal:
 |---|---|---|---|
 | Duplicate frame (mean abs gray diff, 0–255) | 0.20 | 0.05 | Sensor + encoder noise keeps consecutive real frames ≥ ~0.08 apart even in a still scene; truly repeated frames measure ~0.002. The old value raised 90 false duplicates on a static real clip. |
 | Motion jump | any 1.75–6× spike | must also be **isolated** (both neighbours < 1.4× local median) | A hidden drop is one sudden jump; several elevated differences in a row are genuine motion. Cut false hints on real clips from 12 to 2. |
+| Decoder errors | every ffmpeg error line | output-muxer lines excluded (kept as `pipeline_notes`) | Irregular phone timestamps make ffmpeg's *output* muxer warn while writing our thumbnails; this marked a good phone clip `DEGRADED`. |
 
 ## Limitations
 

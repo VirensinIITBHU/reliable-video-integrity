@@ -49,7 +49,8 @@ skipped, duplicated or abnormal frames and produce an integrity report.
 - `run_all.py` : scenarios T1-T10 (transfer) and V1-V7 (video); `evidence/` is committed
 
 ## Status
-Baseline complete and pushed. 21/21 pass with the 3 real clips in `samples/` (git-ignored).
+Baseline complete and pushed. 25/25 pass with the 7 real clips in `samples/` (git-ignored);
+R4-R7 are the user's phone recordings and contain real timestamp gaps. WRITEUP.md = judge-facing summary.
 Done: real-footage tuning (DUP_MAD 0.05, isolated motion jumps), harsher T2, proxy fault
 clock armed on first connection (fixed T9/T10 timing on fast/slow machines).
 

@@ -3,11 +3,11 @@
   "size": 1779428,
   "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
   "total_chunks": 7,
-  "started": "2026-11-15T15:32:13.331Z",
+  "started": "2026-11-15T16:51:58.701Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
   "upload_id": "76b93dc4cb6f1cabf402",
-  "elapsed_seconds": 1.86,
+  "elapsed_seconds": 1.94,
   "stats": {
     "requests": 10,
     "request_failures": 0,
@@ -19,7 +19,7 @@
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:42929": 10
+      "http://127.0.0.1:38619": 10
     }
   },
   "events": [],
@@ -45,7 +45,7 @@
         1.0
       ],
       [
-        0.12,
+        0.13,
         1.0
       ],
       [
@@ -61,11 +61,11 @@
         1.0
       ],
       [
-        0.55,
+        0.56,
         1.0
       ],
       [
-        0.66,
+        0.67,
         1.0
       ],
       [
@@ -73,7 +73,7 @@
         1.0
       ],
       [
-        0.76,
+        0.77,
         1.0
       ]
     ]

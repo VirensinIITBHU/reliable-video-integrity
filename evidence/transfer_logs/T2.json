@@ -3,11 +3,11 @@
   "size": 1779428,
   "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
   "total_chunks": 28,
-  "started": "2026-11-15T15:32:15.684Z",
+  "started": "2026-11-15T16:52:01.136Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
   "upload_id": "e5d676cbfede603851ce",
-  "elapsed_seconds": 14.9,
+  "elapsed_seconds": 15.04,
   "stats": {
     "requests": 41,
     "request_failures": 10,
@@ -19,88 +19,88 @@
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:34275": 41
+      "http://127.0.0.1:39199": 41
     }
   },
   "events": [
     {
-      "t": "2026-11-15T15:32:19.369Z",
+      "t": "2026-11-15T16:52:04.979Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/1",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T15:32:22.584Z",
+      "t": "2026-11-15T16:52:08.195Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/6",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T15:32:23.630Z",
+      "t": "2026-11-15T16:52:09.234Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/11",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T15:32:24.036Z",
+      "t": "2026-11-15T16:52:09.638Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/11",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T15:32:24.866Z",
+      "t": "2026-11-15T16:52:10.470Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/12",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T15:32:25.236Z",
+      "t": "2026-11-15T16:52:10.839Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/12",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T15:32:26.416Z",
+      "t": "2026-11-15T16:52:12.013Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/18",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T15:32:26.633Z",
+      "t": "2026-11-15T16:52:12.227Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/18",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T15:32:26.984Z",
+      "t": "2026-11-15T16:52:12.577Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/18",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T15:32:29.928Z",
+      "t": "2026-11-15T16:52:15.520Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/e5d676cbfede603851ce/chunks/19",
-      "endpoint": "http://127.0.0.1:34275",
+      "endpoint": "http://127.0.0.1:39199",
       "error": "TimeoutError"
     }
   ],
@@ -134,7 +134,7 @@
         0.38
       ],
       [
-        3.07,
+        3.06,
         0.68
       ],
       [
@@ -166,11 +166,11 @@
         0.8
       ],
       [
-        6.42,
+        6.41,
         0.8
       ],
       [
-        6.58,
+        6.57,
         0.67
       ],
       [
@@ -178,15 +178,15 @@
         0.67
       ],
       [
-        7.05,
+        7.04,
         0.39
       ],
       [
-        7.7,
+        7.69,
         0.69
       ],
       [
-        7.89,
+        7.88,
         0.69
       ],
       [
@@ -194,91 +194,91 @@
         0.29
       ],
       [
-        8.64,
+        8.63,
         0.85
       ],
       [
-        8.76,
+        8.75,
         0.85
       ],
       [
-        8.87,
+        8.86,
         0.85
       ],
       [
-        8.99,
+        8.97,
         0.85
       ],
       [
-        9.15,
+        9.14,
         0.56
       ],
       [
-        9.43,
+        9.41,
         0.56
       ],
       [
-        9.66,
+        9.64,
         0.85
       ],
       [
-        9.85,
+        9.84,
         0.85
       ],
       [
-        10.17,
+        10.15,
         0.75
       ],
       [
-        10.93,
+        10.91,
         0.74
       ],
       [
-        11.24,
+        11.22,
         0.37
       ],
       [
-        13.36,
+        13.33,
         0.84
       ],
       [
-        13.47,
+        13.45,
         0.84
       ],
       [
-        13.58,
+        13.56,
         1.0
       ],
       [
-        13.63,
+        13.61,
         1.0
       ],
       [
-        13.67,
+        13.65,
         1.0
       ],
       [
-        13.72,
+        13.69,
         1.0
       ],
       [
-        13.76,
+        13.73,
         1.0
       ],
       [
-        13.81,
+        13.78,
         1.0
       ],
       [
-        13.85,
+        13.82,
         1.0
       ],
       [
-        13.87,
+        13.84,
         1.0
       ],
       [
-        13.88,
+        13.86,
         1.0
       ]
     ]

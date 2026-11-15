@@ -3,11 +3,11 @@
   "size": 1779428,
   "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
   "total_chunks": 7,
-  "started": "2026-11-15T15:32:54.985Z",
+  "started": "2026-11-15T16:52:39.722Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
   "upload_id": "76b93dc4cb6f1cabf402",
-  "elapsed_seconds": 4.84,
+  "elapsed_seconds": 4.89,
   "stats": {
     "requests": 13,
     "request_failures": 3,
@@ -19,39 +19,39 @@
     "resumes": 0,
     "failovers": 1,
     "endpoint_used": {
-      "http://127.0.0.1:39829": 5,
-      "http://127.0.0.1:33915": 8
+      "http://127.0.0.1:45535": 5,
+      "http://127.0.0.1:40017": 8
     }
   },
   "events": [
     {
-      "t": "2026-11-15T15:32:57.026Z",
+      "t": "2026-11-15T16:52:41.806Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
-      "endpoint": "http://127.0.0.1:39829",
+      "endpoint": "http://127.0.0.1:45535",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T15:32:57.052Z",
+      "t": "2026-11-15T16:52:41.832Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
-      "endpoint": "http://127.0.0.1:39829",
+      "endpoint": "http://127.0.0.1:45535",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T15:32:57.256Z",
+      "t": "2026-11-15T16:52:42.035Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
-      "endpoint": "http://127.0.0.1:39829",
+      "endpoint": "http://127.0.0.1:45535",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T15:32:57.256Z",
+      "t": "2026-11-15T16:52:42.035Z",
       "event": "failover",
-      "to": "http://127.0.0.1:33915"
+      "to": "http://127.0.0.1:40017"
     }
   ],
   "proxy_stats": [
@@ -115,15 +115,15 @@
         0.7
       ],
       [
-        1.28,
+        1.29,
         0.7
       ],
       [
-        1.6,
+        1.61,
         0.7
       ],
       [
-        1.88,
+        1.89,
         0.7
       ],
       [

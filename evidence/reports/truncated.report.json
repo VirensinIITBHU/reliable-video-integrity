@@ -24,23 +24,24 @@
   "decode": {
     "error_count": 6,
     "errors": [
-      "[h264 @ 0x5644b09d15c0] Invalid NAL unit size (8088 > 1392).",
-      "[h264 @ 0x5644b09d15c0] missing picture in access unit with size 1396",
-      "[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x5644b08ccb80] stream 0, offset 0x1064b0: partial file",
-      "[h264 @ 0x5644b0ae0280] Invalid NAL unit size (8088 > 1392).",
-      "[h264 @ 0x5644b0ae0280] Error splitting the input into NAL units.",
-      "[vist#0:0/h264 @ 0x5644b08d0680] [dec:h264 @ 0x5644b096d780] Decoding error: Invalid data found when processing input",
-      "[h264 @ 0x55961ee2c5c0] Invalid NAL unit size (8088 > 1392).",
-      "[h264 @ 0x55961ee2c5c0] missing picture in access unit with size 1396",
-      "[h264 @ 0x55961ed28c00] Invalid NAL unit size (8088 > 1392).",
-      "[h264 @ 0x55961ed28c00] Error splitting the input into NAL units.",
-      "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55961ed27b80] stream 0, offset 0x1064b0: partial file"
+      "[h264 @ 0x56051f7575c0] Invalid NAL unit size (8088 > 1392).",
+      "[h264 @ 0x56051f7575c0] missing picture in access unit with size 1396",
+      "[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x56051f652b80] stream 0, offset 0x1064b0: partial file",
+      "[h264 @ 0x56051f866280] Invalid NAL unit size (8088 > 1392).",
+      "[h264 @ 0x56051f866280] Error splitting the input into NAL units.",
+      "[vist#0:0/h264 @ 0x56051f656680] [dec:h264 @ 0x56051f6f3780] Decoding error: Invalid data found when processing input",
+      "[h264 @ 0x55e0a71495c0] Invalid NAL unit size (8088 > 1392).",
+      "[h264 @ 0x55e0a71495c0] missing picture in access unit with size 1396",
+      "[h264 @ 0x55e0a7045c00] Invalid NAL unit size (8088 > 1392).",
+      "[h264 @ 0x55e0a7045c00] Error splitting the input into NAL units.",
+      "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e0a7044b80] stream 0, offset 0x1064b0: partial file"
     ],
     "exit_code": 0,
     "frames_decoded": 540,
-    "frames_with_timestamps": 540
+    "frames_with_timestamps": 540,
+    "pipeline_notes": []
   },
-  "generated": "2026-11-15T15:33:45.812Z",
+  "generated": "2026-11-15T16:53:30.693Z",
   "limitations": [
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
@@ -3884,17 +3885,17 @@
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T15:33:44.447Z",
+        "t": "2026-11-15T16:53:29.252Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T15:33:44.451Z",
+        "t": "2026-11-15T16:53:29.256Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T15:33:44.452Z",
+        "t": "2026-11-15T16:53:29.256Z",
         "to": "ANALYZING"
       }
     ],

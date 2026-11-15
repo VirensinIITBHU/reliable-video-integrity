@@ -12,35 +12,35 @@
       "id": "T2",
       "scenario": "Fluctuating signal 20%-100% + resets + stalls",
       "expected": "COMPLETE despite failures",
-      "observed": "COMPLETE, byte-perfect=True, 14.9s, retries=10, timeouts=3, failovers=0, resent=640KB",
+      "observed": "COMPLETE, byte-perfect=True, 15.0s, retries=10, timeouts=3, failovers=0, resent=640KB",
       "pass": true
     },
     {
       "id": "T3",
       "scenario": "Temporary disconnection (3 s blackout) + reconnect",
       "expected": "COMPLETE after reconnect",
-      "observed": "COMPLETE, byte-perfect=True, 8.8s, retries=6, timeouts=0, failovers=0, resent=1536KB",
+      "observed": "COMPLETE, byte-perfect=True, 8.2s, retries=6, timeouts=0, failovers=0, resent=1536KB",
       "pass": true
     },
     {
       "id": "T4",
       "scenario": "Stalled requests -> client timeouts",
       "expected": "COMPLETE, timeouts recovered",
-      "observed": "COMPLETE, byte-perfect=True, 14.1s, retries=5, timeouts=5, failovers=0, resent=1225KB",
+      "observed": "COMPLETE, byte-perfect=True, 13.9s, retries=5, timeouts=5, failovers=0, resent=1225KB",
       "pass": true
     },
     {
       "id": "T5",
       "scenario": "Connection switching (path A dies -> path B)",
       "expected": "COMPLETE via failover",
-      "observed": "COMPLETE, byte-perfect=True, 4.8s, retries=3, timeouts=0, failovers=1, resent=768KB",
+      "observed": "COMPLETE, byte-perfect=True, 4.9s, retries=3, timeouts=0, failovers=1, resent=768KB",
       "pass": true
     },
     {
       "id": "T6",
       "scenario": "Bytes corrupted in transit",
       "expected": "bad chunks refused + resent, COMPLETE",
-      "observed": "COMPLETE, byte-perfect=True, 2.8s, retries=4, timeouts=0, failovers=0, resent=1024KB",
+      "observed": "COMPLETE, byte-perfect=True, 2.6s, retries=4, timeouts=0, failovers=0, resent=1024KB",
       "pass": true
     },
     {
@@ -140,16 +140,16 @@
     {
       "id": "R1",
       "scenario": "Real clip 12943168_1440_2560_30fps.mp4",
-      "expected": "transfer OK, valid video, no confirmed anomalies",
+      "expected": "byte-perfect transfer; every confirmed anomaly backed by timestamp/decoder evidence",
       "observed": "transfer=COMPLETE; verdict=NO_ANOMALIES_DETECTED; validation=VALID, 906 frames at 30.00 FPS over 30.2s, confirmed anomalies=0, low-confidence hints=0, warnings=none",
       "pass": true,
-      "retries": 17,
+      "retries": 18,
       "size_bytes": 92381046
     },
     {
       "id": "R2",
       "scenario": "Real clip 17474900_1080_1920_30fps.mp4",
-      "expected": "transfer OK, valid video, no confirmed anomalies",
+      "expected": "byte-perfect transfer; every confirmed anomaly backed by timestamp/decoder evidence",
       "observed": "transfer=COMPLETE; verdict=SUSPECTED_ANOMALIES; validation=VALID, 336 frames at 30.00 FPS over 11.2s, confirmed anomalies=0, low-confidence hints=8, warnings=['duration_out_of_spec']",
       "pass": true,
       "retries": 1,
@@ -158,11 +158,47 @@
     {
       "id": "R3",
       "scenario": "Real clip 17503717_720_1280_30fps.mp4",
-      "expected": "transfer OK, valid video, no confirmed anomalies",
+      "expected": "byte-perfect transfer; every confirmed anomaly backed by timestamp/decoder evidence",
       "observed": "transfer=COMPLETE; verdict=SUSPECTED_ANOMALIES; validation=VALID, 913 frames at 30.00 FPS over 30.4s, confirmed anomalies=0, low-confidence hints=2, warnings=none",
       "pass": true,
       "retries": 1,
       "size_bytes": 4944685
+    },
+    {
+      "id": "R4",
+      "scenario": "Real clip VID_20261027_005157996.mp4",
+      "expected": "byte-perfect transfer; every confirmed anomaly backed by timestamp/decoder evidence",
+      "observed": "transfer=COMPLETE; verdict=ANOMALIES_DETECTED; validation=VALID, 922 frames at 30.01 FPS over 30.8s, confirmed anomalies=2 (missing_frames x1 at 11.57-11.60s; missing_frames x1 at 11.83-11.87s), low-confidence hints=0, warnings=['duration_out_of_spec', 'variable_frame_rate']",
+      "pass": true,
+      "retries": 18,
+      "size_bytes": 96638107
+    },
+    {
+      "id": "R5",
+      "scenario": "Real clip VID_20261115_215725973.mp4",
+      "expected": "byte-perfect transfer; every confirmed anomaly backed by timestamp/decoder evidence",
+      "observed": "transfer=COMPLETE; verdict=ANOMALIES_DETECTED; validation=VALID, 892 frames at 30.01 FPS over 31.4s, confirmed anomalies=2 (missing_frames x49 at 1.67-3.30s; missing_frames x1 at 19.74-19.77s), low-confidence hints=8, warnings=['duration_out_of_spec', 'variable_frame_rate']",
+      "pass": true,
+      "retries": 16,
+      "size_bytes": 90112188
+    },
+    {
+      "id": "R6",
+      "scenario": "Real clip VID_20261115_215804856.mp4",
+      "expected": "byte-perfect transfer; every confirmed anomaly backed by timestamp/decoder evidence",
+      "observed": "transfer=COMPLETE; verdict=NO_ANOMALIES_DETECTED; validation=VALID, 952 frames at 30.01 FPS over 31.7s, confirmed anomalies=0, low-confidence hints=0, warnings=['duration_out_of_spec']",
+      "pass": true,
+      "retries": 13,
+      "size_bytes": 64103134
+    },
+    {
+      "id": "R7",
+      "scenario": "Real clip Video from virendrasingh24.mp4",
+      "expected": "byte-perfect transfer; every confirmed anomaly backed by timestamp/decoder evidence",
+      "observed": "transfer=COMPLETE; verdict=ANOMALIES_DETECTED; validation=VALID, 931 frames at 30.01 FPS over 31.3s, confirmed anomalies=7 (missing_frames x1 at 2.61-2.63s; missing_frames x1 at 2.67-2.69s; missing_frames x1 at 13.41-13.43s; missing_frames x1 at 14.57-14.60s; missing_frames x1 at 20.07-20.09s; missing_frames x1 at 27.90-27.92s; missing_frames x1 at 28.26-28.28s), low-confidence hints=14, warnings=['duration_out_of_spec', 'variable_frame_rate']",
+      "pass": true,
+      "retries": 4,
+      "size_bytes": 20677482
     }
   ]
 }
