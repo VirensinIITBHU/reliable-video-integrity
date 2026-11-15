@@ -12,9 +12,8 @@
     "frames_decoded": 906,
     "frames_with_timestamps": 906
   },
-  "generated": "2026-11-15T12:13:56.275Z",
+  "generated": "2026-11-15T15:35:48.616Z",
   "limitations": [
-    "The video is nearly static, so duplicated frames cannot be told apart from real still content.",
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
     "Duplicate detection compares 32x18 grayscale thumbnails; very subtle motion can look identical."
@@ -6410,7 +6409,7 @@
     "server_counters": {
       "chunk_duplicate": 0,
       "chunk_hash_mismatch": 0,
-      "chunk_incomplete_body": 17,
+      "chunk_incomplete_body": 16,
       "chunk_ok": 353,
       "finalize_refused": 0
     },
@@ -6419,17 +6418,17 @@
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T12:13:18.418Z",
+        "t": "2026-11-15T15:35:09.059Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T12:13:18.629Z",
+        "t": "2026-11-15T15:35:09.282Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T12:13:18.631Z",
+        "t": "2026-11-15T15:35:09.283Z",
         "to": "ANALYZING"
       }
     ],

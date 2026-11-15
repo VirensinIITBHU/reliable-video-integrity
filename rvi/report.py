@@ -64,7 +64,8 @@ def render_html(rep):
         w = max(3.0, ((a.get("end_time") or a["start_time"]) - a["start_time"]) / dur * W)
         marks.append('<rect x="%.1f" y="6" width="%.1f" height="28" fill="%s"><title>%s @ %.3fs</title></rect>'
                      % (x, w, COLORS.get(a["type"], "#555"), _e(a["type"]), a["start_time"]))
-    ticks = "".join('<text x="%d" y="52" font-size="10" fill="#666">%ds</text>' % (i / dur * W, i)
+    ticks = "".join('<text x="%d" y="52" font-size="10" fill="#666" text-anchor="%s">%ds</text>'
+                    % (i / dur * W, "start" if i == 0 else "end" if i / dur * W > W - 20 else "middle", i)
                     for i in range(0, int(dur) + 1, 5))
     legend = " ".join('<span class="chip" style="background:%s"></span>%s' % (c, _e(t)) for t, c in COLORS.items())
     rows = "".join(
@@ -105,7 +106,7 @@ svg{width:100%%;height:auto;background:#fafafa;border:1px solid #ddd}li{margin:4
 </body></html>""" % (
         vc, _e(rep["verdict"]), _e(rep["generated"]),
         _e(t["status"]), _e(t["filename"]), t["size_bytes"], t["chunks"], _e(t["sha256"]),
-        _e(t["server_counters"]), _e(t["meaning"]),
+        _e(", ".join("%s=%s" % (k.replace("_", " "), v) for k, v in (t["server_counters"] or {}).items()) if isinstance(t["server_counters"], dict) else t["server_counters"]), _e(t["meaning"]),
         _e(v["status"]), _e(v.get("reason", "")),
         _e("%s / %s %sx%s" % ((rep.get("probe") or {}).get("container"), (rep.get("probe") or {}).get("codec"),
                               (rep.get("probe") or {}).get("width"), (rep.get("probe") or {}).get("height"))),

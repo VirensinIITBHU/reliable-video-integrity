@@ -12,7 +12,7 @@
     "frames_decoded": 900,
     "frames_with_timestamps": 900
   },
-  "generated": "2026-11-15T12:11:29.716Z",
+  "generated": "2026-11-15T15:33:18.549Z",
   "limitations": [
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
@@ -6376,17 +6376,17 @@
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T12:11:27.798Z",
+        "t": "2026-11-15T15:33:16.503Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T12:11:27.804Z",
+        "t": "2026-11-15T15:33:16.509Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T12:11:27.822Z",
+        "t": "2026-11-15T15:33:16.549Z",
         "to": "ANALYZING"
       }
     ],

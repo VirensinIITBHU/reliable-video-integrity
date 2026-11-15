@@ -3,12 +3,12 @@
   "size": 1779428,
   "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
   "total_chunks": 7,
-  "started": "2026-11-15T12:11:15.990Z",
+  "started": "2026-11-15T15:33:04.695Z",
   "final_status": "FAILED",
   "server_state": "UNREACHABLE",
   "upload_id": "76b93dc4cb6f1cabf402",
   "error": "deadline exceeded after 0/7 chunks",
-  "elapsed_seconds": 5.31,
+  "elapsed_seconds": 5.29,
   "stats": {
     "requests": 10,
     "request_failures": 7,
@@ -20,69 +20,69 @@
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:44969": 10
+      "http://127.0.0.1:42609": 10
     }
   },
   "events": [
     {
-      "t": "2026-11-15T12:11:18.301Z",
+      "t": "2026-11-15T15:33:06.987Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
-      "endpoint": "http://127.0.0.1:44969",
+      "endpoint": "http://127.0.0.1:42609",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T12:11:18.326Z",
+      "t": "2026-11-15T15:33:07.013Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
-      "endpoint": "http://127.0.0.1:44969",
+      "endpoint": "http://127.0.0.1:42609",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T12:11:18.529Z",
+      "t": "2026-11-15T15:33:07.216Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
-      "endpoint": "http://127.0.0.1:44969",
+      "endpoint": "http://127.0.0.1:42609",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T12:11:18.941Z",
+      "t": "2026-11-15T15:33:07.628Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
-      "endpoint": "http://127.0.0.1:44969",
+      "endpoint": "http://127.0.0.1:42609",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T12:11:20.318Z",
+      "t": "2026-11-15T15:33:09.006Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
-      "endpoint": "http://127.0.0.1:44969",
+      "endpoint": "http://127.0.0.1:42609",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T12:11:20.628Z",
+      "t": "2026-11-15T15:33:09.315Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
-      "endpoint": "http://127.0.0.1:44969",
+      "endpoint": "http://127.0.0.1:42609",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T12:11:21.298Z",
+      "t": "2026-11-15T15:33:09.985Z",
       "event": "transfer_failed",
       "error": "deadline exceeded after 0/7 chunks"
     },
     {
-      "t": "2026-11-15T12:11:21.301Z",
+      "t": "2026-11-15T15:33:09.986Z",
       "event": "request_failed",
       "method": "GET",
       "path": "/uploads/76b93dc4cb6f1cabf402",
-      "endpoint": "http://127.0.0.1:44969",
+      "endpoint": "http://127.0.0.1:42609",
       "error": "ConnectionResetError"
     }
   ]

@@ -3,11 +3,11 @@
   "size": 1779428,
   "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
   "total_chunks": 7,
-  "started": "2026-11-15T12:10:51.333Z",
+  "started": "2026-11-15T15:32:40.402Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
   "upload_id": "76b93dc4cb6f1cabf402",
-  "elapsed_seconds": 14.38,
+  "elapsed_seconds": 14.09,
   "stats": {
     "requests": 15,
     "request_failures": 5,
@@ -19,48 +19,48 @@
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:44457": 15
+      "http://127.0.0.1:38631": 15
     }
   },
   "events": [
     {
-      "t": "2026-11-15T12:10:54.998Z",
+      "t": "2026-11-15T15:32:43.767Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
-      "endpoint": "http://127.0.0.1:44457",
+      "endpoint": "http://127.0.0.1:38631",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T12:10:58.665Z",
+      "t": "2026-11-15T15:32:47.433Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/5",
-      "endpoint": "http://127.0.0.1:44457",
+      "endpoint": "http://127.0.0.1:38631",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T12:11:00.268Z",
+      "t": "2026-11-15T15:32:49.036Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/5",
-      "endpoint": "http://127.0.0.1:44457",
+      "endpoint": "http://127.0.0.1:38631",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T12:11:01.975Z",
+      "t": "2026-11-15T15:32:50.743Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/5",
-      "endpoint": "http://127.0.0.1:44457",
+      "endpoint": "http://127.0.0.1:38631",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T12:11:04.701Z",
+      "t": "2026-11-15T15:32:53.472Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/6",
-      "endpoint": "http://127.0.0.1:44457",
+      "endpoint": "http://127.0.0.1:38631",
       "error": "TimeoutError"
     }
   ],
@@ -94,7 +94,7 @@
         0.4
       ],
       [
-        2.86,
+        2.85,
         0.4
       ],
       [
@@ -102,7 +102,7 @@
         0.4
       ],
       [
-        3.93,
+        3.92,
         0.4
       ],
       [
@@ -134,7 +134,7 @@
         0.4
       ],
       [
-        12.75,
+        12.76,
         0.4
       ]
     ]

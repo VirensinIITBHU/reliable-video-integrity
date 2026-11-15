@@ -264,9 +264,12 @@ def analyze_video(path, source_manifest=None):
             "evidence": "frame content: frames %d-%d are identical to frame %d (mean abs difference <= %.2f; "
                         "typical motion in this video is %.2f)" % (first, last, a, DUP_MAD, med),
             "confidence": "low" if static_scene else "medium",
-            "cause": "capture freeze or frame repetition during encoding; "
-                     + ("the scene is nearly static, so this may be genuine still content"
-                        if static_scene else "surrounding frames show motion, so a real still scene is unlikely")})
+            "cause": ("bitstream damage: decoder errors are present, so the decoder likely repeated the last good "
+                      "frame (error concealment) rather than the camera freezing"
+                      if damaged else
+                      "capture freeze or frame repetition during encoding; "
+                      + ("the scene is nearly static, so this may be genuine still content"
+                         if static_scene else "surrounding frames show motion, so a real still scene is unlikely"))})
     # Weak evidence: a sudden jump in motion with no timestamp gap. This is the only
     # hint left when drops were hidden by re-encoding to constant frame rate.
     gap_frames = {a["source_frames"][1] for a in res["anomalies"] if a["type"] == "missing_frames"}
@@ -288,9 +291,11 @@ def analyze_video(path, source_manifest=None):
                 "evidence": "frame content: change between frames %d and %d is %.1fx the local typical motion, "
                             "but timestamps show no gap" % (i, i + 1, ratio),
                 "confidence": "low",
-                "cause": "possible frames dropped before a constant-rate re-encode (timestamps regenerated), "
-                         "or simply fast motion / a scene change; cannot be confirmed without a reference"})
-    if static_scene:
+                "cause": ("bitstream damage: decoder errors are present, so this jump is likely a damaged / concealed frame"
+                          if damaged else
+                          "possible frames dropped before a constant-rate re-encode (timestamps regenerated), "
+                          "or simply fast motion / a scene change; cannot be confirmed without a reference")})
+    if static_scene and any(a["type"] == "duplicated_frames" for a in res["anomalies"]):
         res["limitations"].append("The video is nearly static, so duplicated frames cannot be told apart from real still content.")
 
     # ---- 30 FPS resampling map -------------------------------------------

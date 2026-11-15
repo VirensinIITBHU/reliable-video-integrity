@@ -119,9 +119,8 @@
     "frames_decoded": 336,
     "frames_with_timestamps": 336
   },
-  "generated": "2026-11-15T12:14:17.541Z",
+  "generated": "2026-11-15T15:36:08.585Z",
   "limitations": [
-    "The video is nearly static, so duplicated frames cannot be told apart from real still content.",
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
     "Duplicate detection compares 32x18 grayscale thumbnails; very subtle motion can look identical."
@@ -2536,17 +2535,17 @@
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T12:14:10.122Z",
+        "t": "2026-11-15T15:36:00.453Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T12:14:10.159Z",
+        "t": "2026-11-15T15:36:00.495Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T12:14:10.160Z",
+        "t": "2026-11-15T15:36:00.496Z",
         "to": "ANALYZING"
       }
     ],

@@ -3,11 +3,11 @@
   "size": 1779428,
   "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
   "total_chunks": 7,
-  "started": "2026-11-15T12:11:06.208Z",
+  "started": "2026-11-15T15:32:54.985Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
   "upload_id": "76b93dc4cb6f1cabf402",
-  "elapsed_seconds": 4.91,
+  "elapsed_seconds": 4.84,
   "stats": {
     "requests": 13,
     "request_failures": 3,
@@ -19,39 +19,39 @@
     "resumes": 0,
     "failovers": 1,
     "endpoint_used": {
-      "http://127.0.0.1:42173": 5,
-      "http://127.0.0.1:34747": 8
+      "http://127.0.0.1:39829": 5,
+      "http://127.0.0.1:33915": 8
     }
   },
   "events": [
     {
-      "t": "2026-11-15T12:11:08.325Z",
+      "t": "2026-11-15T15:32:57.026Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
-      "endpoint": "http://127.0.0.1:42173",
+      "endpoint": "http://127.0.0.1:39829",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T12:11:08.350Z",
+      "t": "2026-11-15T15:32:57.052Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
-      "endpoint": "http://127.0.0.1:42173",
+      "endpoint": "http://127.0.0.1:39829",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T12:11:08.553Z",
+      "t": "2026-11-15T15:32:57.256Z",
       "event": "request_failed",
       "method": "PUT",
       "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
-      "endpoint": "http://127.0.0.1:42173",
+      "endpoint": "http://127.0.0.1:39829",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T12:11:08.553Z",
+      "t": "2026-11-15T15:32:57.256Z",
       "event": "failover",
-      "to": "http://127.0.0.1:34747"
+      "to": "http://127.0.0.1:33915"
     }
   ],
   "proxy_stats": [
@@ -61,7 +61,7 @@
       "stalls": 0,
       "resets": 0,
       "corrupted_bytes": 0,
-      "bytes_up": 472532,
+      "bytes_up": 488916,
       "bytes_down": 832
     },
     {
@@ -85,15 +85,15 @@
         1.0
       ],
       [
-        0.57,
+        0.56,
         1.0
       ],
       [
-        1.03,
+        1.06,
         0.0
       ],
       [
-        1.23,
+        1.26,
         0.0
       ]
     ],

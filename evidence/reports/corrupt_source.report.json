@@ -28,20 +28,7 @@
       "type": "missing_frames"
     },
     {
-      "cause": "capture freeze or frame repetition during encoding; surrounding frames show motion, so a real still scene is unlikely",
-      "confidence": "medium",
-      "count": 1,
-      "end_time": 14.5333,
-      "evidence": "frame content: frames 435-435 are identical to frame 434 (mean abs difference <= 0.05; typical motion in this video is 1.76)",
-      "source_frames": [
-        435,
-        435
-      ],
-      "start_time": 14.5,
-      "type": "duplicated_frames"
-    },
-    {
-      "cause": "capture freeze or frame repetition during encoding; surrounding frames show motion, so a real still scene is unlikely",
+      "cause": "bitstream damage: decoder errors are present, so the decoder likely repeated the last good frame (error concealment) rather than the camera freezing",
       "confidence": "medium",
       "count": 1,
       "end_time": 14.9,
@@ -54,7 +41,7 @@
       "type": "duplicated_frames"
     },
     {
-      "cause": "possible frames dropped before a constant-rate re-encode (timestamps regenerated), or simply fast motion / a scene change; cannot be confirmed without a reference",
+      "cause": "bitstream damage: decoder errors are present, so this jump is likely a damaged / concealed frame",
       "confidence": "low",
       "count": 1,
       "end_time": 13.6,
@@ -67,11 +54,11 @@
       "type": "motion_discontinuity"
     },
     {
-      "cause": "possible frames dropped before a constant-rate re-encode (timestamps regenerated), or simply fast motion / a scene change; cannot be confirmed without a reference",
+      "cause": "bitstream damage: decoder errors are present, so this jump is likely a damaged / concealed frame",
       "confidence": "low",
       "count": 2,
       "end_time": 14.4667,
-      "evidence": "frame content: change between frames 433 and 434 is 3.3x the local typical motion, but timestamps show no gap",
+      "evidence": "frame content: change between frames 433 and 434 is 3.4x the local typical motion, but timestamps show no gap",
       "source_frames": [
         433,
         434
@@ -80,24 +67,11 @@
       "type": "motion_discontinuity"
     },
     {
-      "cause": "possible frames dropped before a constant-rate re-encode (timestamps regenerated), or simply fast motion / a scene change; cannot be confirmed without a reference",
+      "cause": "bitstream damage: decoder errors are present, so this jump is likely a damaged / concealed frame",
       "confidence": "low",
-      "count": 1,
-      "end_time": 14.7333,
-      "evidence": "frame content: change between frames 441 and 442 is 1.9x the local typical motion, but timestamps show no gap",
-      "source_frames": [
-        441,
-        442
-      ],
-      "start_time": 14.7333,
-      "type": "motion_discontinuity"
-    },
-    {
-      "cause": "possible frames dropped before a constant-rate re-encode (timestamps regenerated), or simply fast motion / a scene change; cannot be confirmed without a reference",
-      "confidence": "low",
-      "count": 1,
+      "count": 2,
       "end_time": 15.4,
-      "evidence": "frame content: change between frames 459 and 460 is 2.2x the local typical motion, but timestamps show no gap",
+      "evidence": "frame content: change between frames 459 and 460 is 2.5x the local typical motion, but timestamps show no gap",
       "source_frames": [
         459,
         460
@@ -106,11 +80,11 @@
       "type": "motion_discontinuity"
     },
     {
-      "cause": "possible frames dropped before a constant-rate re-encode (timestamps regenerated), or simply fast motion / a scene change; cannot be confirmed without a reference",
+      "cause": "bitstream damage: decoder errors are present, so this jump is likely a damaged / concealed frame",
       "confidence": "low",
       "count": 2,
       "end_time": 15.4667,
-      "evidence": "frame content: change between frames 461 and 462 is 2.6x the local typical motion, but timestamps show no gap",
+      "evidence": "frame content: change between frames 461 and 462 is 3.1x the local typical motion, but timestamps show no gap",
       "source_frames": [
         461,
         462
@@ -119,24 +93,11 @@
       "type": "motion_discontinuity"
     },
     {
-      "cause": "possible frames dropped before a constant-rate re-encode (timestamps regenerated), or simply fast motion / a scene change; cannot be confirmed without a reference",
-      "confidence": "low",
-      "count": 1,
-      "end_time": 15.7,
-      "evidence": "frame content: change between frames 468 and 469 is 1.8x the local typical motion, but timestamps show no gap",
-      "source_frames": [
-        468,
-        469
-      ],
-      "start_time": 15.7,
-      "type": "motion_discontinuity"
-    },
-    {
-      "cause": "possible frames dropped before a constant-rate re-encode (timestamps regenerated), or simply fast motion / a scene change; cannot be confirmed without a reference",
+      "cause": "bitstream damage: decoder errors are present, so this jump is likely a damaged / concealed frame",
       "confidence": "low",
       "count": 1,
       "end_time": 15.9,
-      "evidence": "frame content: change between frames 474 and 475 is 2.3x the local typical motion, but timestamps show no gap",
+      "evidence": "frame content: change between frames 474 and 475 is 2.2x the local typical motion, but timestamps show no gap",
       "source_frames": [
         474,
         475
@@ -146,9 +107,9 @@
     }
   ],
   "anomaly_summary": {
-    "duplicated_frames": 2,
+    "duplicated_frames": 1,
     "missing_frames": 1,
-    "motion_discontinuity": 7,
+    "motion_discontinuity": 5,
     "undecodable_frames": 1
   },
   "content": {
@@ -158,52 +119,52 @@
   "decode": {
     "error_count": 45,
     "errors": [
-      "[h264 @ 0x55b8e3f11380] cabac decode of qscale diff failed at 33 14",
-      "[h264 @ 0x55b8e3f11380] error while decoding MB 33 14, bytestream 975",
-      "[h264 @ 0x55b8e3f91280] cabac decode of qscale diff failed at 7 9",
-      "[h264 @ 0x55b8e3ef13c0] error while decoding MB 3 22, bytestream -13",
-      "[h264 @ 0x55b8e3f91280] error while decoding MB 7 9, bytestream 2374",
-      "[h264 @ 0x55b8e3e37e80] top block unavailable for requested intra mode",
-      "[h264 @ 0x55b8e3e37e80] error while decoding MB 17 0, bytestream 3107",
-      "[h264 @ 0x55b8e3e91480] top block unavailable for requested intra mode -1",
-      "[h264 @ 0x55b8e3e91480] error while decoding MB 3 0, bytestream 7277",
-      "[h264 @ 0x55b8e3eb1440] cabac decode of qscale diff failed at 31 13",
-      "[h264 @ 0x55b8e3eb1440] error while decoding MB 31 13, bytestream 2598",
-      "[h264 @ 0x55b8e3f11380] cabac decode of qscale diff failed at 19 18",
-      "[h264 @ 0x55b8e3f11380] error while decoding MB 19 18, bytestream 266",
-      "[h264 @ 0x55b8e3e825c0] Invalid NAL unit size (64478 > 1246).",
-      "[h264 @ 0x55b8e3e825c0] missing picture in access unit with size 1250",
-      "[h264 @ 0x55b8e3d83ec0] cabac decode of qscale diff failed at 8 20",
-      "[h264 @ 0x55b8e3d83ec0] error while decoding MB 8 20, bytestream 84",
-      "[h264 @ 0x55b8e3e37e80] error while decoding MB 6 20, bytestream -11",
-      "[h264 @ 0x55b8e3e20fc0] left block unavailable for requested intra4x4 mode -1",
-      "[h264 @ 0x55b8e3e20fc0] error while decoding MB 0 2, bytestream 5979",
-      "[h264 @ 0x55b8e3eb1440] error while decoding MB 4 19, bytestream -6",
-      "[h264 @ 0x55b8e3ed1400] Invalid NAL unit size (-2100226097 > 205).",
-      "[h264 @ 0x55b8e3ed1400] Error splitting the input into NAL units.",
-      "[h264 @ 0x55b8e3f11380] Invalid NAL unit size (64478 > 1246).",
-      "[h264 @ 0x55b8e3f11380] Error splitting the input into NAL units.",
-      "[vist#0:0/h264 @ 0x55b8e3d81680] [dec:h264 @ 0x55b8e3e1e780] Error submitting packet to decoder: Invalid data found when processing input",
+      "[h264 @ 0x55a35db5a380] cabac decode of qscale diff failed at 33 14",
+      "[h264 @ 0x55a35db5a380] error while decoding MB 33 14, bytestream 975",
+      "[h264 @ 0x55a35db3a3c0] error while decoding MB 3 22, bytestream -13",
+      "[h264 @ 0x55a35dbda280] cabac decode of qscale diff failed at 7 9",
+      "[h264 @ 0x55a35dbda280] error while decoding MB 7 9, bytestream 2374",
+      "[h264 @ 0x55a35da80e80] top block unavailable for requested intra mode",
+      "[h264 @ 0x55a35da80e80] error while decoding MB 17 0, bytestream 3107",
+      "[h264 @ 0x55a35dada480] top block unavailable for requested intra mode -1",
+      "[h264 @ 0x55a35dada480] error while decoding MB 3 0, bytestream 7277",
+      "[h264 @ 0x55a35dafa440] cabac decode of qscale diff failed at 31 13",
+      "[h264 @ 0x55a35dafa440] error while decoding MB 31 13, bytestream 2598",
+      "[h264 @ 0x55a35db5a380] cabac decode of qscale diff failed at 19 18",
+      "[h264 @ 0x55a35db5a380] error while decoding MB 19 18, bytestream 266",
+      "[h264 @ 0x55a35dacb5c0] Invalid NAL unit size (64478 > 1246).",
+      "[h264 @ 0x55a35dacb5c0] missing picture in access unit with size 1250",
+      "[h264 @ 0x55a35d9ccec0] cabac decode of qscale diff failed at 8 20",
+      "[h264 @ 0x55a35d9ccec0] error while decoding MB 8 20, bytestream 84",
+      "[h264 @ 0x55a35da80e80] error while decoding MB 6 20, bytestream -11",
+      "[h264 @ 0x55a35da69fc0] left block unavailable for requested intra4x4 mode -1",
+      "[h264 @ 0x55a35da69fc0] error while decoding MB 0 2, bytestream 5979",
+      "[h264 @ 0x55a35dafa440] error while decoding MB 4 19, bytestream -6",
+      "[h264 @ 0x55a35db1a400] Invalid NAL unit size (-2100226097 > 205).",
+      "[h264 @ 0x55a35db1a400] Error splitting the input into NAL units.",
+      "[h264 @ 0x55a35db5a380] Invalid NAL unit size (64478 > 1246).",
+      "[h264 @ 0x55a35db5a380] Error splitting the input into NAL units.",
+      "[vist#0:0/h264 @ 0x55a35d9ca680] [dec:h264 @ 0x55a35da67780] Error submitting packet to decoder: Invalid data found when processing input",
       "    Last message repeated 1 times",
-      "[h264 @ 0x55b8e3f712c0] cabac decode of qscale diff failed at 22 3",
-      "[h264 @ 0x55b8e3f712c0] error while decoding MB 22 3, bytestream 2068",
-      "[h264 @ 0x55b8e3fd1200] error while decoding MB 35 22, bytestream -12",
-      "[h264 @ 0x55b8e3e37e80] top block unavailable for requested intra mode -1",
-      "[h264 @ 0x55b8e3e37e80] error while decoding MB 7 0, bytestream 6694",
-      "[h264 @ 0x55b8e3eb1440] left block unavailable for requested intra4x4 mode -1",
-      "[h264 @ 0x55b8e3eb1440] error while decoding MB 0 2, bytestream 2722",
-      "[h264 @ 0x55b8e3ed1400] cabac decode of qscale diff failed at 16 12",
-      "[h264 @ 0x55b8e3ed1400] error while decoding MB 16 12, bytestream 813",
-      "[h264 @ 0x55b8e3fb1240] left block unavailable for requested intra mode",
-      "[h264 @ 0x55b8e3fb1240] error while decoding MB 0 3, bytestream 1126",
-      "[h264 @ 0x55b8e3eb1440] top block unavailable for requested intra mode -1",
-      "[h264 @ 0x55b8e3eb1440] error while decoding MB 12 0, bytestream 2979"
+      "[h264 @ 0x55a35dbba2c0] cabac decode of qscale diff failed at 22 3",
+      "[h264 @ 0x55a35dbba2c0] error while decoding MB 22 3, bytestream 2068",
+      "[h264 @ 0x55a35dc1a200] error while decoding MB 35 22, bytestream -12",
+      "[h264 @ 0x55a35da80e80] top block unavailable for requested intra mode -1",
+      "[h264 @ 0x55a35da80e80] error while decoding MB 7 0, bytestream 6694",
+      "[h264 @ 0x55a35dafa440] left block unavailable for requested intra4x4 mode -1",
+      "[h264 @ 0x55a35dafa440] error while decoding MB 0 2, bytestream 2722",
+      "[h264 @ 0x55a35db1a400] cabac decode of qscale diff failed at 16 12",
+      "[h264 @ 0x55a35db1a400] error while decoding MB 16 12, bytestream 813",
+      "[h264 @ 0x55a35dbfa240] left block unavailable for requested intra mode",
+      "[h264 @ 0x55a35dbfa240] error while decoding MB 0 3, bytestream 1126",
+      "[h264 @ 0x55a35dafa440] top block unavailable for requested intra mode -1",
+      "[h264 @ 0x55a35dafa440] error while decoding MB 12 0, bytestream 2979"
     ],
     "exit_code": 0,
     "frames_decoded": 898,
     "frames_with_timestamps": 898
   },
-  "generated": "2026-11-15T12:11:51.624Z",
+  "generated": "2026-11-15T15:33:41.273Z",
   "limitations": [
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
@@ -6567,17 +6528,17 @@
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T12:11:49.518Z",
+        "t": "2026-11-15T15:33:38.932Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T12:11:49.525Z",
+        "t": "2026-11-15T15:33:38.938Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T12:11:49.526Z",
+        "t": "2026-11-15T15:33:38.939Z",
         "to": "ANALYZING"
       }
     ],
