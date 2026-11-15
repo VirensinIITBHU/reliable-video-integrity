@@ -1,0 +1,141 @@
+{
+  "seed": 2026,
+  "results": [
+    {
+      "id": "T1",
+      "scenario": "Stable connection (100%)",
+      "expected": "COMPLETE, no retries",
+      "observed": "COMPLETE, byte-perfect=True, 1.2s, retries=0, timeouts=0, failovers=0, resent=0KB",
+      "pass": true
+    },
+    {
+      "id": "T2",
+      "scenario": "Fluctuating signal 20%-100% + resets + stalls",
+      "expected": "COMPLETE despite failures",
+      "observed": "COMPLETE, byte-perfect=True, 5.5s, retries=1, timeouts=1, failovers=0, resent=256KB",
+      "pass": true
+    },
+    {
+      "id": "T3",
+      "scenario": "Temporary disconnection (3 s blackout) + reconnect",
+      "expected": "COMPLETE after reconnect",
+      "observed": "COMPLETE, byte-perfect=True, 7.9s, retries=6, timeouts=0, failovers=0, resent=1536KB",
+      "pass": true
+    },
+    {
+      "id": "T4",
+      "scenario": "Stalled requests -> client timeouts",
+      "expected": "COMPLETE, timeouts recovered",
+      "observed": "COMPLETE, byte-perfect=True, 13.9s, retries=5, timeouts=5, failovers=0, resent=1280KB",
+      "pass": true
+    },
+    {
+      "id": "T5",
+      "scenario": "Connection switching (path A dies -> path B)",
+      "expected": "COMPLETE via failover",
+      "observed": "COMPLETE, byte-perfect=True, 4.3s, retries=3, timeouts=0, failovers=1, resent=768KB",
+      "pass": true
+    },
+    {
+      "id": "T6",
+      "scenario": "Bytes corrupted in transit",
+      "expected": "bad chunks refused + resent, COMPLETE",
+      "observed": "COMPLETE, byte-perfect=True, 2.2s, retries=4, timeouts=0, failovers=0, resent=1024KB",
+      "pass": true
+    },
+    {
+      "id": "T7",
+      "scenario": "Partial upload, finalize attempted",
+      "expected": "refused, nothing accepted",
+      "observed": "HTTP 409 incomplete, 4 chunks missing, state=UPLOADING, accepted files=0",
+      "pass": true
+    },
+    {
+      "id": "T8",
+      "scenario": "Altered data at rest before finalize",
+      "expected": "REJECTED by whole-file SHA-256",
+      "observed": "HTTP 422 state=REJECTED (whole_file_mismatch: size 1871751/1871751, sha256 MISMATCH), accepted files=0",
+      "pass": true
+    },
+    {
+      "id": "T8b",
+      "scenario": "Altered chunk sent by client",
+      "expected": "chunk refused (422)",
+      "observed": "HTTP 422 chunk_integrity_mismatch",
+      "pass": true
+    },
+    {
+      "id": "T9",
+      "scenario": "Network never returns (permanent outage)",
+      "expected": "client FAILED, server STALLED, nothing accepted",
+      "observed": "client=FAILED, server=STALLED with 1/8 chunks, accepted files=0",
+      "pass": true
+    },
+    {
+      "id": "T10",
+      "scenario": "New client process resumes the stalled upload",
+      "expected": "resume, only missing chunks sent",
+      "observed": "COMPLETE, resumed=True, sent 1571KB of 1827KB, byte-perfect=True",
+      "pass": true
+    },
+    {
+      "id": "V1",
+      "scenario": "Clean 30 s / 30 FPS video",
+      "expected": "no anomalies",
+      "observed": "transfer=COMPLETE; verdict=NO_ANOMALIES_DETECTED; anomalies=0",
+      "pass": true
+    },
+    {
+      "id": "V2",
+      "scenario": "Frames dropped, timestamps preserved",
+      "expected": "every gap located",
+      "observed": "transfer=COMPLETE; verdict=ANOMALIES_DETECTED; gaps found 4/4, false alarms 0, missed 0",
+      "pass": true,
+      "detection": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    {
+      "id": "V3",
+      "scenario": "Frozen / duplicated frames",
+      "expected": "every run located",
+      "observed": "transfer=COMPLETE; verdict=ANOMALIES_DETECTED; runs found 3/3, false alarms 0, missed 0",
+      "pass": true,
+      "detection": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    {
+      "id": "V4",
+      "scenario": "Frames dropped then re-encoded to constant rate",
+      "expected": "only low-confidence hints (documented limit)",
+      "observed": "transfer=COMPLETE; verdict=SUSPECTED_ANOMALIES; no timestamp evidence (as expected); 4 low-confidence motion jumps flagged",
+      "pass": true
+    },
+    {
+      "id": "V5",
+      "scenario": "Video altered before upload (bitstream damage)",
+      "expected": "transfer OK, decode errors reported",
+      "observed": "transfer=COMPLETE; verdict=ANOMALIES_DETECTED; validation=DEGRADED, decoder errors=47",
+      "pass": true
+    },
+    {
+      "id": "V6",
+      "scenario": "Truncated video file",
+      "expected": "transfer OK, truncation reported",
+      "observed": "transfer=COMPLETE; verdict=ANOMALIES_DETECTED; truncated_stream: 360 frames missing from 18.0s",
+      "pass": true
+    },
+    {
+      "id": "V7",
+      "scenario": "Invalid file (random bytes named .mp4)",
+      "expected": "INVALID_VIDEO, no crash",
+      "observed": "transfer=COMPLETE; verdict=INVALID_VIDEO; validation=INVALID (not a parseable media container)",
+      "pass": true
+    }
+  ]
+}

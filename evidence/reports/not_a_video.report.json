@@ -1,0 +1,62 @@
+{
+  "anomalies": [],
+  "anomaly_summary": {},
+  "content": null,
+  "decode": null,
+  "generated": "2026-11-15T10:42:18.199Z",
+  "limitations": [],
+  "probe": {
+    "errors": [
+      "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x56346cd136c0] moov atom not found",
+      "/tmp/rvi-qbfdrp8c/verified/efdf3ccb40b510c7c3b2_not_a_video.mp4: Invalid data found when processing input"
+    ],
+    "ok": false,
+    "reason": "not a parseable media container"
+  },
+  "reference": null,
+  "resample_30fps": null,
+  "timing": null,
+  "transfer": {
+    "chunks": 2,
+    "filename": "not_a_video.mp4",
+    "meaning": "Every chunk and the whole file matched the client's SHA-256. Any issue reported below therefore existed in the source file and is NOT a transfer error.",
+    "server_counters": {
+      "chunk_duplicate": 0,
+      "chunk_hash_mismatch": 0,
+      "chunk_incomplete_body": 0,
+      "chunk_ok": 2,
+      "finalize_refused": 0
+    },
+    "sha256": "28ec62d1afe0845bef1af10d9623b386d7d3ef1fd3fa3e0e5404bb3d475f7af3",
+    "size_bytes": 300000,
+    "state_history": [
+      {
+        "from": "UPLOADING",
+        "t": "2026-11-15T10:42:18.125Z",
+        "to": "VERIFYING"
+      },
+      {
+        "from": "VERIFYING",
+        "t": "2026-11-15T10:42:18.128Z",
+        "to": "COMPLETE"
+      },
+      {
+        "from": "COMPLETE",
+        "t": "2026-11-15T10:42:18.129Z",
+        "to": "ANALYZING"
+      }
+    ],
+    "status": "VERIFIED_BYTE_PERFECT",
+    "upload_id": "efdf3ccb40b510c7c3b2"
+  },
+  "validation": {
+    "errors": [
+      "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x56346cd136c0] moov atom not found",
+      "/tmp/rvi-qbfdrp8c/verified/efdf3ccb40b510c7c3b2_not_a_video.mp4: Invalid data found when processing input"
+    ],
+    "reason": "not a parseable media container",
+    "status": "INVALID"
+  },
+  "verdict": "INVALID_VIDEO",
+  "warnings": []
+}

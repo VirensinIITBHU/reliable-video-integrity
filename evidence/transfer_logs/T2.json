@@ -1,0 +1,98 @@
+{
+  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
+  "size": 1871751,
+  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
+  "total_chunks": 8,
+  "started": "2026-11-15T10:41:06.924Z",
+  "final_status": "COMPLETE",
+  "server_state": "COMPLETE",
+  "upload_id": "819cf4125aaf14182b38",
+  "elapsed_seconds": 5.51,
+  "stats": {
+    "requests": 12,
+    "request_failures": 1,
+    "timeouts": 1,
+    "chunk_retries": 1,
+    "chunks_rejected_by_server": 0,
+    "bytes_sent": 2133895,
+    "bytes_resent": 262144,
+    "resumes": 0,
+    "failovers": 0,
+    "endpoint_used": {
+      "http://127.0.0.1:40811": 12
+    }
+  },
+  "events": [
+    {
+      "t": "2026-11-15T10:41:10.116Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:40811",
+      "error": "TimeoutError"
+    }
+  ],
+  "proxy_stats": [
+    {
+      "connections": 12,
+      "blackout_drops": 0,
+      "stalls": 1,
+      "resets": 0,
+      "corrupted_bytes": 0,
+      "bytes_up": 1907957,
+      "bytes_down": 3775
+    }
+  ],
+  "signal_trace": [
+    [
+      [
+        0.54,
+        0.6
+      ],
+      [
+        0.72,
+        0.6
+      ],
+      [
+        1.19,
+        0.61
+      ],
+      [
+        3.22,
+        0.68
+      ],
+      [
+        3.6,
+        0.65
+      ],
+      [
+        4.01,
+        0.83
+      ],
+      [
+        4.25,
+        0.83
+      ],
+      [
+        4.49,
+        0.83
+      ],
+      [
+        4.83,
+        0.64
+      ],
+      [
+        5.17,
+        0.78
+      ],
+      [
+        5.3,
+        0.78
+      ],
+      [
+        5.4,
+        0.78
+      ]
+    ]
+  ]
+}

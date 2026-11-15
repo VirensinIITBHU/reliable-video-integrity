@@ -1,0 +1,146 @@
+{
+  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
+  "size": 1871751,
+  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
+  "total_chunks": 8,
+  "started": "2026-11-15T10:41:21.360Z",
+  "final_status": "COMPLETE",
+  "server_state": "COMPLETE",
+  "upload_id": "819cf4125aaf14182b38",
+  "elapsed_seconds": 13.86,
+  "stats": {
+    "requests": 16,
+    "request_failures": 5,
+    "timeouts": 5,
+    "chunk_retries": 5,
+    "chunks_rejected_by_server": 0,
+    "bytes_sent": 3182471,
+    "bytes_resent": 1310720,
+    "resumes": 0,
+    "failovers": 0,
+    "endpoint_used": {
+      "http://127.0.0.1:33119": 16
+    }
+  },
+  "events": [
+    {
+      "t": "2026-11-15T10:41:24.173Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:33119",
+      "error": "TimeoutError"
+    },
+    {
+      "t": "2026-11-15T10:41:27.826Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/5",
+      "endpoint": "http://127.0.0.1:33119",
+      "error": "TimeoutError"
+    },
+    {
+      "t": "2026-11-15T10:41:29.428Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/5",
+      "endpoint": "http://127.0.0.1:33119",
+      "error": "TimeoutError"
+    },
+    {
+      "t": "2026-11-15T10:41:31.135Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/5",
+      "endpoint": "http://127.0.0.1:33119",
+      "error": "TimeoutError"
+    },
+    {
+      "t": "2026-11-15T10:41:33.861Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/6",
+      "endpoint": "http://127.0.0.1:33119",
+      "error": "TimeoutError"
+    }
+  ],
+  "proxy_stats": [
+    {
+      "connections": 16,
+      "blackout_drops": 0,
+      "stalls": 5,
+      "resets": 0,
+      "corrupted_bytes": 0,
+      "bytes_up": 2393873,
+      "bytes_down": 4067
+    }
+  ],
+  "signal_trace": [
+    [
+      [
+        0.52,
+        0.4
+      ],
+      [
+        0.77,
+        0.4
+      ],
+      [
+        1.31,
+        0.4
+      ],
+      [
+        2.84,
+        0.4
+      ],
+      [
+        3.37,
+        0.4
+      ],
+      [
+        3.9,
+        0.4
+      ],
+      [
+        4.43,
+        0.4
+      ],
+      [
+        4.96,
+        0.4
+      ],
+      [
+        6.57,
+        0.4
+      ],
+      [
+        8.27,
+        0.4
+      ],
+      [
+        10.47,
+        0.4
+      ],
+      [
+        11.0,
+        0.4
+      ],
+      [
+        12.52,
+        0.4
+      ],
+      [
+        13.05,
+        0.4
+      ],
+      [
+        13.35,
+        0.4
+      ],
+      [
+        13.6,
+        0.4
+      ]
+    ]
+  ]
+}

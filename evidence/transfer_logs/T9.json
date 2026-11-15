@@ -1,0 +1,97 @@
+{
+  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
+  "size": 1871751,
+  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
+  "total_chunks": 8,
+  "started": "2026-11-15T10:41:44.253Z",
+  "final_status": "FAILED",
+  "server_state": "UNREACHABLE",
+  "upload_id": "819cf4125aaf14182b38",
+  "error": "deadline exceeded after 0/8 chunks",
+  "elapsed_seconds": 6.0,
+  "stats": {
+    "requests": 10,
+    "request_failures": 8,
+    "timeouts": 0,
+    "chunk_retries": 7,
+    "chunks_rejected_by_server": 0,
+    "bytes_sent": 2097152,
+    "bytes_resent": 1572864,
+    "resumes": 0,
+    "failovers": 0,
+    "endpoint_used": {
+      "http://127.0.0.1:45485": 10
+    }
+  },
+  "events": [
+    {
+      "t": "2026-11-15T10:41:45.457Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:45485",
+      "error": "RemoteDisconnected"
+    },
+    {
+      "t": "2026-11-15T10:41:45.481Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:45485",
+      "error": "ConnectionResetError"
+    },
+    {
+      "t": "2026-11-15T10:41:45.684Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:45485",
+      "error": "ConnectionResetError"
+    },
+    {
+      "t": "2026-11-15T10:41:46.095Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:45485",
+      "error": "ConnectionResetError"
+    },
+    {
+      "t": "2026-11-15T10:41:47.472Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:45485",
+      "error": "ConnectionResetError"
+    },
+    {
+      "t": "2026-11-15T10:41:47.781Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:45485",
+      "error": "ConnectionResetError"
+    },
+    {
+      "t": "2026-11-15T10:41:48.452Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
+      "endpoint": "http://127.0.0.1:45485",
+      "error": "ConnectionResetError"
+    },
+    {
+      "t": "2026-11-15T10:41:50.255Z",
+      "event": "transfer_failed",
+      "error": "deadline exceeded after 0/8 chunks"
+    },
+    {
+      "t": "2026-11-15T10:41:50.256Z",
+      "event": "request_failed",
+      "method": "GET",
+      "path": "/uploads/819cf4125aaf14182b38",
+      "endpoint": "http://127.0.0.1:45485",
+      "error": "ConnectionResetError"
+    }
+  ]
+}
