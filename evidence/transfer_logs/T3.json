@@ -1,120 +1,124 @@
 {
-  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
-  "size": 1871751,
-  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
-  "total_chunks": 8,
-  "started": "2026-11-15T10:41:12.925Z",
+  "file": "test_videos/clean.mp4",
+  "size": 1779428,
+  "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
+  "total_chunks": 7,
+  "started": "2026-11-15T12:10:42.512Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
-  "upload_id": "819cf4125aaf14182b38",
-  "elapsed_seconds": 7.94,
+  "upload_id": "76b93dc4cb6f1cabf402",
+  "elapsed_seconds": 8.33,
   "stats": {
-    "requests": 17,
+    "requests": 16,
     "request_failures": 6,
     "timeouts": 0,
     "chunk_retries": 6,
     "chunks_rejected_by_server": 0,
-    "bytes_sent": 3444615,
+    "bytes_sent": 3352292,
     "bytes_resent": 1572864,
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:46135": 17
+      "http://127.0.0.1:46697": 16
     }
   },
   "events": [
     {
-      "t": "2026-11-15T10:41:13.939Z",
+      "t": "2026-11-15T12:10:44.624Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:46135",
-      "error": "IncompleteRead"
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:46697",
+      "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T10:41:13.964Z",
+      "t": "2026-11-15T12:10:44.649Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:46135",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:46697",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:14.166Z",
+      "t": "2026-11-15T12:10:44.853Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:46135",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:46697",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:14.577Z",
+      "t": "2026-11-15T12:10:45.264Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:46135",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:46697",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:15.954Z",
+      "t": "2026-11-15T12:10:46.641Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:46135",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:46697",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:16.263Z",
+      "t": "2026-11-15T12:10:46.951Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:46135",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:46697",
       "error": "ConnectionResetError"
     }
   ],
   "proxy_stats": [
     {
-      "connections": 17,
+      "connections": 16,
       "blackout_drops": 6,
       "stalls": 0,
       "resets": 0,
       "corrupted_bytes": 0,
-      "bytes_up": 2137603,
-      "bytes_down": 3912
+      "bytes_up": 1991695,
+      "bytes_down": 3588
     }
   ],
   "signal_trace": [
     [
       [
-        0.45,
+        0.0,
         1.0
       ],
       [
-        0.47,
+        0.02,
         1.0
       ],
       [
-        1.04,
+        0.57,
+        1.0
+      ],
+      [
+        1.03,
         0.0
       ],
       [
-        1.24,
+        1.23,
         0.0
       ],
       [
-        1.65,
+        1.64,
         0.0
       ],
       [
-        3.03,
+        3.02,
         0.0
       ],
       [
-        3.34,
+        3.33,
         0.0
       ],
       [
-        4.01,
+        4.0,
         1.0
       ],
       [
@@ -126,31 +130,23 @@
         1.0
       ],
       [
-        5.64,
+        5.65,
         1.0
       ],
       [
-        6.18,
+        6.19,
         1.0
       ],
       [
-        6.73,
+        6.74,
         1.0
       ],
       [
-        7.27,
+        7.18,
         1.0
       ],
       [
-        7.82,
-        1.0
-      ],
-      [
-        7.91,
-        1.0
-      ],
-      [
-        7.92,
+        7.2,
         1.0
       ]
     ]

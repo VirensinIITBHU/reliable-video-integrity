@@ -18,29 +18,29 @@
     "truncated_stream": 1
   },
   "content": {
-    "duplicate_threshold": 0.2,
-    "median_frame_difference": 1.7656
+    "duplicate_threshold": 0.05,
+    "median_frame_difference": 1.7726
   },
   "decode": {
     "error_count": 6,
     "errors": [
-      "[NULL @ 0x55ff946f10c0] Invalid NAL unit size (8083 > 4064).",
-      "[NULL @ 0x55ff946f10c0] missing picture in access unit with size 4068",
-      "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55ff946f00c0] stream 0, offset 0x11329d: partial file",
-      "[h264 @ 0x55ff94832f40] Invalid NAL unit size (8083 > 4064).",
-      "[h264 @ 0x55ff94832f40] Error splitting the input into NAL units.",
-      "[vist#0:0/h264 @ 0x55ff946f80c0] Decoding error: Invalid data found when processing input",
-      "[NULL @ 0x56525a28b880] Invalid NAL unit size (8083 > 4064).",
-      "[NULL @ 0x56525a28b880] missing picture in access unit with size 4068",
-      "[h264 @ 0x56525a426300] Invalid NAL unit size (8083 > 4064).",
-      "[h264 @ 0x56525a426300] Error splitting the input into NAL units.",
-      "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x56525a28a840] stream 0, offset 0x11329d: partial file"
+      "[h264 @ 0x55ddb1ca45c0] Invalid NAL unit size (8088 > 1392).",
+      "[h264 @ 0x55ddb1ca45c0] missing picture in access unit with size 1396",
+      "[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x55ddb1b9fb80] stream 0, offset 0x1064b0: partial file",
+      "[h264 @ 0x55ddb1db3280] Invalid NAL unit size (8088 > 1392).",
+      "[h264 @ 0x55ddb1db3280] Error splitting the input into NAL units.",
+      "[vist#0:0/h264 @ 0x55ddb1ba3680] [dec:h264 @ 0x55ddb1c40780] Decoding error: Invalid data found when processing input",
+      "[h264 @ 0x5615cde635c0] Invalid NAL unit size (8088 > 1392).",
+      "[h264 @ 0x5615cde635c0] missing picture in access unit with size 1396",
+      "[h264 @ 0x5615cdd5fc00] Invalid NAL unit size (8088 > 1392).",
+      "[h264 @ 0x5615cdd5fc00] Error splitting the input into NAL units.",
+      "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5615cdd5eb80] stream 0, offset 0x1064b0: partial file"
     ],
     "exit_code": 0,
     "frames_decoded": 540,
     "frames_with_timestamps": 540
   },
-  "generated": "2026-11-15T10:42:16.322Z",
+  "generated": "2026-11-15T12:11:56.154Z",
   "limitations": [
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
@@ -56,7 +56,7 @@
     "header_frame_count": 900,
     "height": 360,
     "ok": true,
-    "size_bytes": 1123050,
+    "size_bytes": 1067656,
     "width": 640
   },
   "reference": {
@@ -3879,27 +3879,27 @@
       "chunk_ok": 5,
       "finalize_refused": 0
     },
-    "sha256": "6ca1342d5381a87b488170b665bb32e27a85c2199d7cb814516dafa445e186cf",
-    "size_bytes": 1123050,
+    "sha256": "993837a5c2fa9755335ea1ee0b19e286ed308a84f39ab33e9f047439cebbb0ce",
+    "size_bytes": 1067656,
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T10:42:15.606Z",
+        "t": "2026-11-15T12:11:54.592Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T10:42:15.612Z",
+        "t": "2026-11-15T12:11:54.596Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T10:42:15.613Z",
+        "t": "2026-11-15T12:11:54.597Z",
         "to": "ANALYZING"
       }
     ],
     "status": "VERIFIED_BYTE_PERFECT",
-    "upload_id": "11dc6258418944911f50"
+    "upload_id": "a74cc9ff9f22913a9c0a"
   },
   "validation": {
     "reason": "decoder reported 6 error line(s)",

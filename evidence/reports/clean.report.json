@@ -2,8 +2,8 @@
   "anomalies": [],
   "anomaly_summary": {},
   "content": {
-    "duplicate_threshold": 0.2,
-    "median_frame_difference": 1.7795
+    "duplicate_threshold": 0.05,
+    "median_frame_difference": 1.7812
   },
   "decode": {
     "error_count": 0,
@@ -12,7 +12,7 @@
     "frames_decoded": 900,
     "frames_with_timestamps": 900
   },
-  "generated": "2026-11-15T10:41:57.101Z",
+  "generated": "2026-11-15T12:11:29.716Z",
   "limitations": [
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
@@ -28,7 +28,7 @@
     "header_frame_count": 900,
     "height": 360,
     "ok": true,
-    "size_bytes": 1871751,
+    "size_bytes": 1779428,
     "width": 640
   },
   "reference": {
@@ -6361,37 +6361,37 @@
     "span_seconds": 30.0
   },
   "transfer": {
-    "chunks": 8,
+    "chunks": 7,
     "filename": "clean.mp4",
     "meaning": "Every chunk and the whole file matched the client's SHA-256. Any issue reported below therefore existed in the source file and is NOT a transfer error.",
     "server_counters": {
       "chunk_duplicate": 0,
       "chunk_hash_mismatch": 0,
       "chunk_incomplete_body": 0,
-      "chunk_ok": 8,
+      "chunk_ok": 7,
       "finalize_refused": 0
     },
-    "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
-    "size_bytes": 1871751,
+    "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
+    "size_bytes": 1779428,
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T10:41:55.750Z",
+        "t": "2026-11-15T12:11:27.798Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T10:41:55.757Z",
+        "t": "2026-11-15T12:11:27.804Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T10:41:55.767Z",
+        "t": "2026-11-15T12:11:27.822Z",
         "to": "ANALYZING"
       }
     ],
     "status": "VERIFIED_BYTE_PERFECT",
-    "upload_id": "819cf4125aaf14182b38"
+    "upload_id": "76b93dc4cb6f1cabf402"
   },
   "validation": {
     "reason": "decoded cleanly",

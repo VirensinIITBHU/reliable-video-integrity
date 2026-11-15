@@ -18,7 +18,7 @@
       "confidence": "low",
       "count": 1,
       "end_time": 11.0,
-      "evidence": "frame content: change between frames 329 and 330 is 1.8x the local typical motion, but timestamps show no gap",
+      "evidence": "frame content: change between frames 329 and 330 is 1.9x the local typical motion, but timestamps show no gap",
       "source_frames": [
         329,
         330
@@ -57,8 +57,8 @@
     "motion_discontinuity": 4
   },
   "content": {
-    "duplicate_threshold": 0.2,
-    "median_frame_difference": 1.7587
+    "duplicate_threshold": 0.05,
+    "median_frame_difference": 1.7595
   },
   "decode": {
     "error_count": 0,
@@ -67,7 +67,7 @@
     "frames_decoded": 889,
     "frames_with_timestamps": 889
   },
-  "generated": "2026-11-15T10:42:08.858Z",
+  "generated": "2026-11-15T12:11:45.621Z",
   "limitations": [
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
@@ -78,12 +78,12 @@
     "codec": "h264",
     "container": "mov,mp4,m4a,3gp,3g2,mj2",
     "declared_fps": 30.0,
-    "duration": 29.633333,
+    "duration": 29.633008,
     "errors": [],
     "header_frame_count": 889,
     "height": 360,
     "ok": true,
-    "size_bytes": 1668528,
+    "size_bytes": 1583101,
     "width": 640
   },
   "reference": {
@@ -6349,27 +6349,27 @@
       "chunk_ok": 7,
       "finalize_refused": 0
     },
-    "sha256": "61b25f2a96126d7be0cbd18fa90f3e93f8dceebaa2e307bcec767a5373aae445",
-    "size_bytes": 1668528,
+    "sha256": "5983b9ad97c9a220c343508ca09fe95fea9f78cb66bb6c9582b781f122ffd606",
+    "size_bytes": 1583101,
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T10:42:07.680Z",
+        "t": "2026-11-15T12:11:43.757Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T10:42:07.686Z",
+        "t": "2026-11-15T12:11:43.764Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T10:42:07.687Z",
+        "t": "2026-11-15T12:11:43.765Z",
         "to": "ANALYZING"
       }
     ],
     "status": "VERIFIED_BYTE_PERFECT",
-    "upload_id": "bb4f33465d7d46ddbb38"
+    "upload_id": "026f80352ee561233f8e"
   },
   "validation": {
     "reason": "decoded cleanly",

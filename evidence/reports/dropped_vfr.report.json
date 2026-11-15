@@ -73,8 +73,8 @@
     "missing_frames": 4
   },
   "content": {
-    "duplicate_threshold": 0.2,
-    "median_frame_difference": 1.7622
+    "duplicate_threshold": 0.05,
+    "median_frame_difference": 1.7613
   },
   "decode": {
     "error_count": 0,
@@ -83,7 +83,7 @@
     "frames_decoded": 889,
     "frames_with_timestamps": 889
   },
-  "generated": "2026-11-15T10:42:00.867Z",
+  "generated": "2026-11-15T12:11:35.199Z",
   "limitations": [
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
@@ -99,7 +99,7 @@
     "header_frame_count": 889,
     "height": 360,
     "ok": true,
-    "size_bytes": 1672444,
+    "size_bytes": 1589851,
     "width": 640
   },
   "reference": {
@@ -6442,27 +6442,27 @@
       "chunk_ok": 7,
       "finalize_refused": 0
     },
-    "sha256": "8ab3d8c18d6148182e53385ef4e2792ab6a308a0bc9f6d91cc731ae6d71627ae",
-    "size_bytes": 1672444,
+    "sha256": "0b770c14e439876e74fca6af6ac3249a202414107bb557513bc64e8868a1fe61",
+    "size_bytes": 1589851,
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T10:41:59.794Z",
+        "t": "2026-11-15T12:11:33.390Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T10:41:59.801Z",
+        "t": "2026-11-15T12:11:33.395Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T10:41:59.802Z",
+        "t": "2026-11-15T12:11:33.396Z",
         "to": "ANALYZING"
       }
     ],
     "status": "VERIFIED_BYTE_PERFECT",
-    "upload_id": "c543e98bf18e5990c9d0"
+    "upload_id": "01baac1918addefe059d"
   },
   "validation": {
     "reason": "decoded cleanly",

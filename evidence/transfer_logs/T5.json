@@ -1,137 +1,133 @@
 {
-  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
-  "size": 1871751,
-  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
-  "total_chunks": 8,
-  "started": "2026-11-15T10:41:35.716Z",
+  "file": "test_videos/clean.mp4",
+  "size": 1779428,
+  "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
+  "total_chunks": 7,
+  "started": "2026-11-15T12:11:06.208Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
-  "upload_id": "819cf4125aaf14182b38",
-  "elapsed_seconds": 4.3,
+  "upload_id": "76b93dc4cb6f1cabf402",
+  "elapsed_seconds": 4.91,
   "stats": {
-    "requests": 14,
+    "requests": 13,
     "request_failures": 3,
     "timeouts": 0,
     "chunk_retries": 3,
     "chunks_rejected_by_server": 0,
-    "bytes_sent": 2658183,
+    "bytes_sent": 2565860,
     "bytes_resent": 786432,
     "resumes": 0,
     "failovers": 1,
     "endpoint_used": {
-      "http://127.0.0.1:44311": 4,
-      "http://127.0.0.1:39679": 10
+      "http://127.0.0.1:42173": 5,
+      "http://127.0.0.1:34747": 8
     }
   },
   "events": [
     {
-      "t": "2026-11-15T10:41:36.728Z",
+      "t": "2026-11-15T12:11:08.325Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:44311",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:42173",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T10:41:36.753Z",
+      "t": "2026-11-15T12:11:08.350Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:44311",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:42173",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:36.955Z",
+      "t": "2026-11-15T12:11:08.553Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/0",
-      "endpoint": "http://127.0.0.1:44311",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:42173",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:36.955Z",
+      "t": "2026-11-15T12:11:08.553Z",
       "event": "failover",
-      "to": "http://127.0.0.1:39679"
+      "to": "http://127.0.0.1:34747"
     }
   ],
   "proxy_stats": [
     {
-      "connections": 4,
+      "connections": 5,
       "blackout_drops": 3,
       "stalls": 0,
       "resets": 0,
       "corrupted_bytes": 0,
-      "bytes_up": 258314,
-      "bytes_down": 663
+      "bytes_up": 472532,
+      "bytes_down": 832
     },
     {
-      "connections": 10,
+      "connections": 8,
       "blackout_drops": 0,
       "stalls": 0,
       "resets": 0,
       "corrupted_bytes": 0,
-      "bytes_up": 1874169,
-      "bytes_down": 2822
+      "bytes_up": 1519163,
+      "bytes_down": 2466
     }
   ],
   "signal_trace": [
     [
       [
-        0.46,
+        0.0,
         1.0
       ],
       [
-        0.48,
+        0.02,
         1.0
       ],
       [
-        1.04,
+        0.57,
+        1.0
+      ],
+      [
+        1.03,
         0.0
       ],
       [
-        1.24,
+        1.23,
         0.0
       ]
     ],
     [
       [
-        1.65,
+        0.0,
         0.7
       ],
       [
-        1.97,
+        0.32,
         0.7
       ],
       [
-        2.28,
+        0.64,
         0.7
       ],
       [
-        2.6,
+        0.96,
         0.7
       ],
       [
-        2.92,
+        1.28,
         0.7
       ],
       [
-        3.24,
+        1.6,
         0.7
       ],
       [
-        3.56,
+        1.88,
         0.7
       ],
       [
-        3.87,
-        0.7
-      ],
-      [
-        4.03,
-        0.7
-      ],
-      [
-        4.16,
+        2.02,
         0.7
       ]
     ]

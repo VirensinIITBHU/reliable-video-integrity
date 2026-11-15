@@ -5,7 +5,7 @@
       "confidence": "medium",
       "count": 3,
       "end_time": 6.7667,
-      "evidence": "frame content: frames 200-202 are identical to frame 199 (mean abs difference <= 0.20; typical motion in this video is 1.76)",
+      "evidence": "frame content: frames 200-202 are identical to frame 199 (mean abs difference <= 0.05; typical motion in this video is 1.76)",
       "source_frames": [
         200,
         202
@@ -18,7 +18,7 @@
       "confidence": "medium",
       "count": 1,
       "end_time": 15.1333,
-      "evidence": "frame content: frames 453-453 are identical to frame 452 (mean abs difference <= 0.20; typical motion in this video is 1.76)",
+      "evidence": "frame content: frames 453-453 are identical to frame 452 (mean abs difference <= 0.05; typical motion in this video is 1.76)",
       "source_frames": [
         453,
         453
@@ -31,7 +31,7 @@
       "confidence": "medium",
       "count": 4,
       "end_time": 23.6,
-      "evidence": "frame content: frames 704-707 are identical to frame 703 (mean abs difference <= 0.20; typical motion in this video is 1.76)",
+      "evidence": "frame content: frames 704-707 are identical to frame 703 (mean abs difference <= 0.05; typical motion in this video is 1.76)",
       "source_frames": [
         704,
         707
@@ -44,8 +44,8 @@
     "duplicated_frames": 3
   },
   "content": {
-    "duplicate_threshold": 0.2,
-    "median_frame_difference": 1.7552
+    "duplicate_threshold": 0.05,
+    "median_frame_difference": 1.7622
   },
   "decode": {
     "error_count": 0,
@@ -54,7 +54,7 @@
     "frames_decoded": 908,
     "frames_with_timestamps": 908
   },
-  "generated": "2026-11-15T10:42:04.941Z",
+  "generated": "2026-11-15T12:11:40.429Z",
   "limitations": [
     "Byte-perfect transfer proves the backend file equals the client file; it cannot prove the original recording had no dropped frames.",
     "If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the gap evidence is erased; without an external reference (e.g. capture-side frame counter) such drops are not detectable from timestamps.",
@@ -65,12 +65,12 @@
     "codec": "h264",
     "container": "mov,mp4,m4a,3gp,3g2,mj2",
     "declared_fps": 30.0,
-    "duration": 30.266667,
+    "duration": 30.266016,
     "errors": [],
     "header_frame_count": 908,
     "height": 360,
     "ok": true,
-    "size_bytes": 1682536,
+    "size_bytes": 1593348,
     "width": 640
   },
   "reference": {
@@ -6469,27 +6469,27 @@
       "chunk_ok": 7,
       "finalize_refused": 0
     },
-    "sha256": "13a3202f834dd793284203c872d113973554b5e5373c2a7580f2aff222b2df61",
-    "size_bytes": 1682536,
+    "sha256": "a8390566ac25cd6672cecebb2f87452c48d615dd774062aafc7c2fb18faa2484",
+    "size_bytes": 1593348,
     "state_history": [
       {
         "from": "UPLOADING",
-        "t": "2026-11-15T10:42:03.739Z",
+        "t": "2026-11-15T12:11:38.587Z",
         "to": "VERIFYING"
       },
       {
         "from": "VERIFYING",
-        "t": "2026-11-15T10:42:03.745Z",
+        "t": "2026-11-15T12:11:38.592Z",
         "to": "COMPLETE"
       },
       {
         "from": "COMPLETE",
-        "t": "2026-11-15T10:42:03.746Z",
+        "t": "2026-11-15T12:11:38.592Z",
         "to": "ANALYZING"
       }
     ],
     "status": "VERIFIED_BYTE_PERFECT",
-    "upload_id": "f81ae1b09e4ec135cb3e"
+    "upload_id": "cdbab9953475a465ac20"
   },
   "validation": {
     "reason": "decoded cleanly",

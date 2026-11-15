@@ -1,144 +1,140 @@
 {
-  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
-  "size": 1871751,
-  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
-  "total_chunks": 8,
-  "started": "2026-11-15T10:41:21.360Z",
+  "file": "test_videos/clean.mp4",
+  "size": 1779428,
+  "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
+  "total_chunks": 7,
+  "started": "2026-11-15T12:10:51.333Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
-  "upload_id": "819cf4125aaf14182b38",
-  "elapsed_seconds": 13.86,
+  "upload_id": "76b93dc4cb6f1cabf402",
+  "elapsed_seconds": 14.38,
   "stats": {
-    "requests": 16,
+    "requests": 15,
     "request_failures": 5,
     "timeouts": 5,
     "chunk_retries": 5,
     "chunks_rejected_by_server": 0,
-    "bytes_sent": 3182471,
-    "bytes_resent": 1310720,
+    "bytes_sent": 3034568,
+    "bytes_resent": 1255140,
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:33119": 16
+      "http://127.0.0.1:44457": 15
     }
   },
   "events": [
     {
-      "t": "2026-11-15T10:41:24.173Z",
+      "t": "2026-11-15T12:10:54.998Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:33119",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/1",
+      "endpoint": "http://127.0.0.1:44457",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T10:41:27.826Z",
+      "t": "2026-11-15T12:10:58.665Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/5",
-      "endpoint": "http://127.0.0.1:33119",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/5",
+      "endpoint": "http://127.0.0.1:44457",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T10:41:29.428Z",
+      "t": "2026-11-15T12:11:00.268Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/5",
-      "endpoint": "http://127.0.0.1:33119",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/5",
+      "endpoint": "http://127.0.0.1:44457",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T10:41:31.135Z",
+      "t": "2026-11-15T12:11:01.975Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/5",
-      "endpoint": "http://127.0.0.1:33119",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/5",
+      "endpoint": "http://127.0.0.1:44457",
       "error": "TimeoutError"
     },
     {
-      "t": "2026-11-15T10:41:33.861Z",
+      "t": "2026-11-15T12:11:04.701Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/6",
-      "endpoint": "http://127.0.0.1:33119",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/6",
+      "endpoint": "http://127.0.0.1:44457",
       "error": "TimeoutError"
     }
   ],
   "proxy_stats": [
     {
-      "connections": 16,
+      "connections": 15,
       "blackout_drops": 0,
       "stalls": 5,
       "resets": 0,
       "corrupted_bytes": 0,
-      "bytes_up": 2393873,
-      "bytes_down": 4067
+      "bytes_up": 2299165,
+      "bytes_down": 3588
     }
   ],
   "signal_trace": [
     [
       [
-        0.52,
+        0.0,
         0.4
       ],
       [
-        0.77,
+        0.26,
         0.4
       ],
       [
-        1.31,
+        0.79,
         0.4
       ],
       [
-        2.84,
+        2.32,
         0.4
       ],
       [
-        3.37,
+        2.86,
         0.4
       ],
       [
-        3.9,
+        3.39,
         0.4
       ],
       [
-        4.43,
+        3.93,
         0.4
       ],
       [
-        4.96,
+        4.46,
         0.4
       ],
       [
-        6.57,
+        6.06,
         0.4
       ],
       [
-        8.27,
+        7.77,
         0.4
       ],
       [
-        10.47,
+        9.96,
         0.4
       ],
       [
-        11.0,
+        10.5,
         0.4
       ],
       [
-        12.52,
+        12.02,
         0.4
       ],
       [
-        13.05,
+        12.5,
         0.4
       ],
       [
-        13.35,
-        0.4
-      ],
-      [
-        13.6,
+        12.75,
         0.4
       ]
     ]

@@ -1,97 +1,285 @@
 {
-  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
-  "size": 1871751,
-  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
-  "total_chunks": 8,
-  "started": "2026-11-15T10:41:06.924Z",
+  "file": "test_videos/clean.mp4",
+  "size": 1779428,
+  "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
+  "total_chunks": 28,
+  "started": "2026-11-15T12:10:27.029Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
-  "upload_id": "819cf4125aaf14182b38",
-  "elapsed_seconds": 5.51,
+  "upload_id": "e5d676cbfede603851ce",
+  "elapsed_seconds": 14.99,
   "stats": {
-    "requests": 12,
-    "request_failures": 1,
-    "timeouts": 1,
-    "chunk_retries": 1,
+    "requests": 41,
+    "request_failures": 10,
+    "timeouts": 3,
+    "chunk_retries": 10,
     "chunks_rejected_by_server": 0,
-    "bytes_sent": 2133895,
-    "bytes_resent": 262144,
+    "bytes_sent": 2434788,
+    "bytes_resent": 655360,
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:40811": 12
+      "http://127.0.0.1:40285": 41
     }
   },
   "events": [
     {
-      "t": "2026-11-15T10:41:10.116Z",
+      "t": "2026-11-15T12:10:30.829Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:40811",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/1",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "TimeoutError"
+    },
+    {
+      "t": "2026-11-15T12:10:34.044Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/6",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "TimeoutError"
+    },
+    {
+      "t": "2026-11-15T12:10:35.083Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/11",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "RemoteDisconnected"
+    },
+    {
+      "t": "2026-11-15T12:10:35.488Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/11",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "RemoteDisconnected"
+    },
+    {
+      "t": "2026-11-15T12:10:36.316Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/12",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "RemoteDisconnected"
+    },
+    {
+      "t": "2026-11-15T12:10:36.685Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/12",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "RemoteDisconnected"
+    },
+    {
+      "t": "2026-11-15T12:10:37.858Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/18",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "RemoteDisconnected"
+    },
+    {
+      "t": "2026-11-15T12:10:38.072Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/18",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "RemoteDisconnected"
+    },
+    {
+      "t": "2026-11-15T12:10:38.421Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/18",
+      "endpoint": "http://127.0.0.1:40285",
+      "error": "RemoteDisconnected"
+    },
+    {
+      "t": "2026-11-15T12:10:41.363Z",
+      "event": "request_failed",
+      "method": "PUT",
+      "path": "/uploads/e5d676cbfede603851ce/chunks/19",
+      "endpoint": "http://127.0.0.1:40285",
       "error": "TimeoutError"
     }
   ],
   "proxy_stats": [
     {
-      "connections": 12,
+      "connections": 41,
       "blackout_drops": 0,
-      "stalls": 1,
-      "resets": 0,
+      "stalls": 3,
+      "resets": 7,
       "corrupted_bytes": 0,
-      "bytes_up": 1907957,
-      "bytes_down": 3775
+      "bytes_up": 1979120,
+      "bytes_down": 7617
     }
   ],
   "signal_trace": [
     [
       [
-        0.54,
+        0.0,
+        0.3
+      ],
+      [
+        0.31,
+        0.3
+      ],
+      [
+        0.68,
         0.6
       ],
       [
-        0.72,
-        0.6
+        2.71,
+        0.38
       ],
       [
-        1.19,
-        0.61
-      ],
-      [
-        3.22,
+        3.06,
         0.68
       ],
       [
-        3.6,
+        3.27,
+        0.68
+      ],
+      [
+        3.47,
+        0.68
+      ],
+      [
+        3.68,
         0.65
       ],
       [
-        4.01,
-        0.83
+        3.9,
+        0.65
       ],
       [
-        4.25,
-        0.83
+        6.0,
+        0.81
       ],
       [
-        4.49,
-        0.83
+        6.14,
+        0.8
       ],
       [
-        4.83,
-        0.64
+        6.28,
+        0.8
       ],
       [
-        5.17,
-        0.78
+        6.41,
+        0.8
       ],
       [
-        5.3,
-        0.78
+        6.57,
+        0.67
       ],
       [
-        5.4,
-        0.78
+        6.78,
+        0.67
+      ],
+      [
+        7.04,
+        0.39
+      ],
+      [
+        7.69,
+        0.69
+      ],
+      [
+        7.88,
+        0.69
+      ],
+      [
+        8.19,
+        0.29
+      ],
+      [
+        8.63,
+        0.85
+      ],
+      [
+        8.74,
+        0.85
+      ],
+      [
+        8.85,
+        0.85
+      ],
+      [
+        8.97,
+        0.85
+      ],
+      [
+        9.13,
+        0.56
+      ],
+      [
+        9.41,
+        0.56
+      ],
+      [
+        9.64,
+        0.85
+      ],
+      [
+        9.83,
+        0.85
+      ],
+      [
+        10.15,
+        0.75
+      ],
+      [
+        10.9,
+        0.74
+      ],
+      [
+        11.21,
+        0.37
+      ],
+      [
+        13.33,
+        0.84
+      ],
+      [
+        13.44,
+        0.84
+      ],
+      [
+        13.55,
+        1.0
+      ],
+      [
+        13.6,
+        1.0
+      ],
+      [
+        13.64,
+        1.0
+      ],
+      [
+        13.68,
+        1.0
+      ],
+      [
+        13.73,
+        1.0
+      ],
+      [
+        13.77,
+        1.0
+      ],
+      [
+        13.81,
+        1.0
+      ],
+      [
+        13.83,
+        1.0
+      ],
+      [
+        13.85,
+        1.0
       ]
     ]
   ]

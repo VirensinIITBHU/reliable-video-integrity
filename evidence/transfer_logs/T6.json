@@ -1,68 +1,76 @@
 {
-  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
-  "size": 1871751,
-  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
-  "total_chunks": 8,
-  "started": "2026-11-15T10:41:40.514Z",
+  "file": "test_videos/clean.mp4",
+  "size": 1779428,
+  "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
+  "total_chunks": 7,
+  "started": "2026-11-15T12:11:11.613Z",
   "final_status": "COMPLETE",
   "server_state": "COMPLETE",
-  "upload_id": "819cf4125aaf14182b38",
-  "elapsed_seconds": 2.18,
+  "upload_id": "76b93dc4cb6f1cabf402",
+  "elapsed_seconds": 2.8,
   "stats": {
-    "requests": 15,
+    "requests": 14,
     "request_failures": 0,
     "timeouts": 0,
     "chunk_retries": 4,
     "chunks_rejected_by_server": 4,
-    "bytes_sent": 2920327,
+    "bytes_sent": 2828004,
     "bytes_resent": 1048576,
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:44519": 15
+      "http://127.0.0.1:45661": 14
     }
   },
   "events": [
     {
-      "t": "2026-11-15T10:41:41.187Z",
+      "t": "2026-11-15T12:11:12.925Z",
       "event": "chunk_rejected",
       "n": 1
     },
     {
-      "t": "2026-11-15T10:41:41.317Z",
+      "t": "2026-11-15T12:11:13.059Z",
       "event": "chunk_rejected",
       "n": 1
     },
     {
-      "t": "2026-11-15T10:41:41.937Z",
+      "t": "2026-11-15T12:11:13.695Z",
       "event": "chunk_rejected",
       "n": 4
     },
     {
-      "t": "2026-11-15T10:41:42.250Z",
+      "t": "2026-11-15T12:11:14.013Z",
       "event": "chunk_rejected",
       "n": 5
     }
   ],
   "proxy_stats": [
     {
-      "connections": 15,
+      "connections": 14,
       "blackout_drops": 0,
       "stalls": 0,
       "resets": 0,
       "corrupted_bytes": 5,
-      "bytes_up": 2924845,
-      "bytes_down": 4301
+      "bytes_up": 2832185,
+      "bytes_down": 4110
     }
   ],
   "signal_trace": [
     [
       [
-        0.45,
+        0.0,
         1.0
       ],
       [
-        0.46,
+        0.02,
+        1.0
+      ],
+      [
+        0.13,
+        1.0
+      ],
+      [
+        0.26,
         1.0
       ],
       [
@@ -70,11 +78,15 @@
         1.0
       ],
       [
-        0.7,
+        0.68,
         1.0
       ],
       [
-        1.0,
+        0.79,
+        1.0
+      ],
+      [
+        0.9,
         1.0
       ],
       [
@@ -82,39 +94,23 @@
         1.0
       ],
       [
-        1.21,
+        1.22,
         1.0
       ],
       [
-        1.32,
+        1.5,
         1.0
       ],
       [
-        1.53,
+        1.6,
         1.0
       ],
       [
-        1.63,
+        1.69,
         1.0
       ],
       [
-        1.91,
-        1.0
-      ],
-      [
-        2.01,
-        1.0
-      ],
-      [
-        2.12,
-        1.0
-      ],
-      [
-        2.14,
-        1.0
-      ],
-      [
-        2.16,
+        1.71,
         1.0
       ]
     ]

@@ -1,96 +1,88 @@
 {
-  "file": "/home/claude/reliable-video-integrity/test_videos/clean.mp4",
-  "size": 1871751,
-  "sha256": "e114fec2aa2070d78100a47b83cb700ad2d693045cdbc254e6565edd8d8ad69c",
-  "total_chunks": 8,
-  "started": "2026-11-15T10:41:44.253Z",
+  "file": "test_videos/clean.mp4",
+  "size": 1779428,
+  "sha256": "1cb5c9b102d29dd839da7739e8828ea1638540dabeddeb045d1d85a32d4c4a7b",
+  "total_chunks": 7,
+  "started": "2026-11-15T12:11:15.990Z",
   "final_status": "FAILED",
   "server_state": "UNREACHABLE",
-  "upload_id": "819cf4125aaf14182b38",
-  "error": "deadline exceeded after 0/8 chunks",
-  "elapsed_seconds": 6.0,
+  "upload_id": "76b93dc4cb6f1cabf402",
+  "error": "deadline exceeded after 0/7 chunks",
+  "elapsed_seconds": 5.31,
   "stats": {
     "requests": 10,
-    "request_failures": 8,
+    "request_failures": 7,
     "timeouts": 0,
-    "chunk_retries": 7,
+    "chunk_retries": 6,
     "chunks_rejected_by_server": 0,
     "bytes_sent": 2097152,
-    "bytes_resent": 1572864,
+    "bytes_resent": 1310720,
     "resumes": 0,
     "failovers": 0,
     "endpoint_used": {
-      "http://127.0.0.1:45485": 10
+      "http://127.0.0.1:44969": 10
     }
   },
   "events": [
     {
-      "t": "2026-11-15T10:41:45.457Z",
+      "t": "2026-11-15T12:11:18.301Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:45485",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
+      "endpoint": "http://127.0.0.1:44969",
       "error": "RemoteDisconnected"
     },
     {
-      "t": "2026-11-15T10:41:45.481Z",
+      "t": "2026-11-15T12:11:18.326Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:45485",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
+      "endpoint": "http://127.0.0.1:44969",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:45.684Z",
+      "t": "2026-11-15T12:11:18.529Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:45485",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
+      "endpoint": "http://127.0.0.1:44969",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:46.095Z",
+      "t": "2026-11-15T12:11:18.941Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:45485",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
+      "endpoint": "http://127.0.0.1:44969",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:47.472Z",
+      "t": "2026-11-15T12:11:20.318Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:45485",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
+      "endpoint": "http://127.0.0.1:44969",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:47.781Z",
+      "t": "2026-11-15T12:11:20.628Z",
       "event": "request_failed",
       "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:45485",
+      "path": "/uploads/76b93dc4cb6f1cabf402/chunks/2",
+      "endpoint": "http://127.0.0.1:44969",
       "error": "ConnectionResetError"
     },
     {
-      "t": "2026-11-15T10:41:48.452Z",
-      "event": "request_failed",
-      "method": "PUT",
-      "path": "/uploads/819cf4125aaf14182b38/chunks/1",
-      "endpoint": "http://127.0.0.1:45485",
-      "error": "ConnectionResetError"
-    },
-    {
-      "t": "2026-11-15T10:41:50.255Z",
+      "t": "2026-11-15T12:11:21.298Z",
       "event": "transfer_failed",
-      "error": "deadline exceeded after 0/8 chunks"
+      "error": "deadline exceeded after 0/7 chunks"
     },
     {
-      "t": "2026-11-15T10:41:50.256Z",
+      "t": "2026-11-15T12:11:21.301Z",
       "event": "request_failed",
       "method": "GET",
-      "path": "/uploads/819cf4125aaf14182b38",
-      "endpoint": "http://127.0.0.1:45485",
+      "path": "/uploads/76b93dc4cb6f1cabf402",
+      "endpoint": "http://127.0.0.1:44969",
       "error": "ConnectionResetError"
     }
   ]
