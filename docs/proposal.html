@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Technical Proposal — Reliable Video Integrity</title>
+<style>
+  @page { size: A4; margin: 16mm 16mm 18mm 16mm; }
+  :root{
+    --ink:#14181f; --ink2:#3d4552; --muted:#6b7482; --rule:#dfe3e8; --soft:#f4f6f8;
+    --accent:#1f4fd1; --accent-soft:#e8eefc; --good:#137a4b; --good-soft:#e5f4ec;
+    --warn:#a35b00; --warn-soft:#fdf1e1; --bad:#b42318; --bad-soft:#fdebe9;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#fff;color:var(--ink);}
+  body{font-family:"Inter","Noto Sans","Liberation Sans",sans-serif;font-size:9.6pt;line-height:1.5;
+       -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  h1,h2,h3{margin:0;font-weight:700;letter-spacing:-0.01em}
+  h2{break-after:avoid;font-size:14pt;margin:15px 0 7px;padding-bottom:5px;border-bottom:2px solid var(--ink);display:flex;gap:10px;align-items:baseline}
+  h2 .n{color:var(--accent);font-variant-numeric:tabular-nums}
+  h3{break-after:avoid;font-size:10.5pt;margin:12px 0 4px}
+  p{margin:0 0 7px}
+  code,.mono{font-family:"Noto Sans Mono","DejaVu Sans Mono",monospace;font-size:8.4pt;background:var(--soft);padding:0 3px;border-radius:3px}
+  a{color:var(--accent);text-decoration:none}
+  .page-break{break-before:page}
+  .avoid{break-inside:avoid}
+  .muted{color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:8.6pt}
+  th{text-align:left;font-weight:600;color:var(--ink2);border-bottom:1.5px solid var(--ink);padding:5px 6px;background:var(--soft)}
+  td{border-bottom:1px solid var(--rule);padding:4.5px 6px;vertical-align:top}
+  tr{break-inside:avoid}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;font-size:7.6pt;font-weight:600;padding:1px 7px;border-radius:10px;white-space:nowrap}
+  .p-good{background:var(--good-soft);color:var(--good)}
+  .p-warn{background:var(--warn-soft);color:var(--warn)}
+  .p-bad{background:var(--bad-soft);color:var(--bad)}
+  .p-acc{background:var(--accent-soft);color:var(--accent)}
+
+  /* cover */
+  .cover{border-radius:10px;background:linear-gradient(135deg,#0f1b3d 0%,#1f4fd1 100%);color:#fff;padding:26px 28px 22px}
+  .cover .kicker{font-size:8.4pt;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+  .cover h1{font-size:23pt;line-height:1.15;margin:8px 0 6px}
+  .cover .sub{font-size:10.5pt;opacity:.9;max-width:150mm}
+  .author{display:flex;justify-content:space-between;align-items:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.25)}
+  .author .name{font-size:13pt;font-weight:700}
+  .author a{color:#fff;opacity:.92}
+  .author .links{font-size:8.6pt;line-height:1.7}
+  .author .date{font-size:8.4pt;text-align:right;opacity:.85}
+
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 6px}
+  .tile{border:1px solid var(--rule);border-radius:8px;padding:9px 11px}
+  .tile .v{font-size:19pt;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+  .tile .l{font-size:7.9pt;color:var(--muted);margin-top:2px;line-height:1.3}
+
+  .callout{border-left:3px solid var(--accent);background:var(--accent-soft);padding:9px 12px;border-radius:0 6px 6px 0;margin:8px 0 10px}
+  .callout b{color:var(--accent)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .fig{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;margin:8px 0 10px;break-inside:avoid}
+  .fig .cap{font-size:8pt;color:var(--muted);margin-top:4px}
+  .fig .t{font-weight:600;font-size:9pt;margin-bottom:4px}
+  ul{margin:2px 0 8px;padding-left:16px} li{margin:2px 0}
+
+  .adr{border:1px solid var(--rule);border-radius:8px;padding:9px 12px;margin:0 0 8px;break-inside:avoid}
+  .adr .h{display:flex;gap:8px;align-items:baseline;font-weight:700;font-size:9.8pt;margin-bottom:3px}
+  .adr .h .id{color:var(--accent);font-variant-numeric:tabular-nums}
+  .adr .row{display:grid;grid-template-columns:22mm 1fr;gap:6px;font-size:8.8pt;margin-top:2px}
+  .adr .k{color:var(--muted);font-weight:600}
+
+  footer{margin-top:8px;padding-top:6px;border-top:1px solid var(--rule);font-size:8pt;color:var(--muted);display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div class="kicker">Confluentia 2026 · nSEPIA Technical Challenge · IIT (BHU)</div>
+  <h1>Reliable Video Upload &amp;<br>Frame Integrity Detection</h1>
+  <div class="sub">Technical proposal and results. The system delivers a 30-second video over a link that swings between 20% and 100% signal. It accepts the file only once it is proven byte-perfect, then analyses it at 30 FPS and backs every reported anomaly with evidence.</div>
+  <div class="author">
+    <div>
+      <div class="name">Virendra Singh</div>
+      <div class="links">
+        Website · <a href="https://virendrasingh-ai-ml.vercel.app/">virendrasingh-ai-ml.vercel.app</a><br>
+        GitHub · <a href="https://github.com/VirensinIITBHU">github.com/VirensinIITBHU</a><br>
+        Repository · <a href="https://github.com/VirensinIITBHU/reliable-video-integrity">github.com/VirensinIITBHU/reliable-video-integrity</a>
+      </div>
+    </div>
+    <div class="date">Submitted 15 November 2026<br>Python stdlib + ffmpeg only</div>
+  </div>
+</div>
+
+<div class="tiles">
+  <div class="tile"><div class="v">25/25</div><div class="l">scenarios pass in one command (<code>python run_all.py</code>)</div></div>
+  <div class="tile"><div class="v">0</div><div class="l">false alarms on ground-truth videos (4/4 gaps, 3/3 freeze runs found)</div></div>
+  <div class="tile"><div class="v">0</div><div class="l">damaged or partial files accepted across all fault scenarios</div></div>
+  <div class="tile"><div class="v">1.67 s</div><div class="l">real 49-frame capture drop found in my own phone recording</div></div>
+</div>
+
+<h2><span class="n">01</span> Summary</h2>
+<p>The challenge has two halves, and the main design choice was to keep them strictly apart.</p>
+<ul>
+  <li><b>Transfer reliability.</b> A chunked, resumable, hash-verified upload protocol survives bandwidth swings, latency, resets, stalls, blackouts, timeouts, path switches and corruption in transit. A file is accepted (<code>COMPLETE</code>) only when every chunk <i>and</i> the whole file match the SHA-256 values the client declared up front.</li>
+  <li><b>Frame integrity.</b> A verified file is validated with ffprobe, fully decoded and checked for missing, duplicated and abnormal frames on a 30 FPS slot map. Every finding states its <i>evidence</i>, a <i>confidence</i> and a <i>cause</i>: transfer, capture/encoding, or bitstream damage.</li>
+</ul>
+<div class="callout"><b>The judges' key distinction is built into the design.</b> A byte-perfect transfer proves only that the server's file equals the client's file. It cannot prove the recording had no dropped frames. Each report therefore gives the transfer verdict and the frame verdict separately, and treats repeats or omissions that come only from 30 FPS conversion as warnings, never as anomalies.</div>
+
+<!-- ============ ARCHITECTURE ============ -->
+<div class="avoid"><h2><span class="n">02</span> Architecture</h2>
+<div class="fig">
+<svg viewBox="0 0 760 262" width="100%" font-family="Inter, sans-serif" font-size="11">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3d4552"/></marker></defs>
+  <rect x="8" y="34" width="162" height="156" rx="10" fill="#f4f6f8" stroke="#3d4552"/>
+  <text x="89" y="56" text-anchor="middle" font-weight="700" font-size="13">Client</text>
+  <g fill="#3d4552" font-size="10.5">
+  <text x="20" y="78">• pre-upload ffprobe</text>
+  <text x="20" y="95">• manifest: file + chunk</text>
+  <text x="30" y="109">SHA-256 (256 KB)</text>
+  <text x="20" y="126">• timeout per request</text>
+  <text x="20" y="143">• backoff + full jitter</text>
+  <text x="20" y="160">• resume from server</text>
+  <text x="20" y="177">• endpoint failover</text></g>
+  <rect x="206" y="52" width="160" height="120" rx="10" fill="#fdf1e1" stroke="#a35b00"/>
+  <text x="286" y="74" text-anchor="middle" font-weight="700" font-size="13">Chaos proxy</text>
+  <text x="286" y="91" text-anchor="middle" fill="#a35b00">signal 20–100%</text>
+  <g fill="#3d4552" font-size="10">
+  <text x="218" y="111">bandwidth = max · s²</text>
+  <text x="218" y="127">latency + 400 ms · (1 − s)</text>
+  <text x="218" y="143">stalls · resets · blackouts</text>
+  <text x="218" y="159">byte corruption (optional)</text></g>
+  <line x1="170" y1="112" x2="204" y2="112" stroke="#3d4552" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="366" y1="112" x2="398" y2="112" stroke="#3d4552" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="400" y="10" width="352" height="222" rx="10" fill="#fff" stroke="#3d4552"/>
+  <text x="576" y="30" text-anchor="middle" font-weight="700" font-size="13">Backend</text>
+  <rect x="414" y="42" width="152" height="46" rx="6" fill="#e8eefc" stroke="#1f4fd1"/>
+  <text x="490" y="61" text-anchor="middle" font-weight="600">per-chunk SHA-256</text>
+  <text x="490" y="78" text-anchor="middle" fill="#3d4552" font-size="9.5">atomic write (fsync + rename)</text>
+  <rect x="586" y="42" width="152" height="46" rx="6" fill="#e8eefc" stroke="#1f4fd1"/>
+  <text x="662" y="61" text-anchor="middle" font-weight="600">assemble</text>
+  <text x="662" y="78" text-anchor="middle" fill="#3d4552" font-size="9.5">whole-file SHA-256</text>
+  <line x1="566" y1="65" x2="584" y2="65" stroke="#3d4552" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="586" y="104" width="72" height="24" rx="12" fill="#e5f4ec" stroke="#137a4b"/>
+  <text x="622" y="120" text-anchor="middle" font-weight="700" fill="#137a4b" font-size="9.5">COMPLETE</text>
+  <rect x="666" y="104" width="72" height="24" rx="12" fill="#fdebe9" stroke="#b42318"/>
+  <text x="702" y="120" text-anchor="middle" font-weight="700" fill="#b42318" font-size="9.5">REJECTED</text>
+  <line x1="640" y1="88" x2="626" y2="102" stroke="#137a4b" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="684" y1="88" x2="698" y2="102" stroke="#b42318" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="414" y="113" fill="#6b7482" font-size="9.5">hash match → COMPLETE</text>
+  <text x="414" y="127" fill="#6b7482" font-size="9.5">only COMPLETE files are decoded</text>
+  <g font-size="10.5">
+    <rect x="414" y="166" width="74" height="44" rx="6" fill="#f4f6f8" stroke="#3d4552"/><text x="451" y="184" text-anchor="middle" font-weight="600">validate</text><text x="451" y="199" text-anchor="middle" fill="#6b7482" font-size="9">ffprobe</text>
+    <rect x="500" y="166" width="74" height="44" rx="6" fill="#f4f6f8" stroke="#3d4552"/><text x="537" y="184" text-anchor="middle" font-weight="600">decode</text><text x="537" y="199" text-anchor="middle" fill="#6b7482" font-size="9">full, errors kept</text>
+    <rect x="586" y="166" width="74" height="44" rx="6" fill="#f4f6f8" stroke="#3d4552"/><text x="623" y="184" text-anchor="middle" font-weight="600">30 FPS map</text><text x="623" y="199" text-anchor="middle" fill="#6b7482" font-size="9">PTS + content</text>
+    <rect x="672" y="166" width="66" height="44" rx="6" fill="#f4f6f8" stroke="#3d4552"/><text x="705" y="184" text-anchor="middle" font-weight="600">report</text><text x="705" y="199" text-anchor="middle" fill="#6b7482" font-size="9">JSON + HTML</text>
+    <line x1="488" y1="188" x2="498" y2="188" stroke="#3d4552" stroke-width="1.5" marker-end="url(#ar)"/>
+    <line x1="574" y1="188" x2="584" y2="188" stroke="#3d4552" stroke-width="1.5" marker-end="url(#ar)"/>
+    <line x1="660" y1="188" x2="670" y2="188" stroke="#3d4552" stroke-width="1.5" marker-end="url(#ar)"/>
+  </g>
+  <path d="M622,128 L622,146 L451,146 L451,164" fill="none" stroke="#137a4b" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="380" y="254" text-anchor="middle" fill="#3d4552" font-size="10"><tspan font-weight="600">Server states: </tspan>UPLOADING → STALLED → VERIFYING → COMPLETE | REJECTED | EXPIRED → ANALYZING → ANALYZED</text>
+</svg>
+<div class="cap">Figure 1. End-to-end flow. The chaos proxy sits between client and backend, so the real code path runs under bad network conditions in every test.</div>
+</div></div>
+
+<table>
+  <tr><th style="width:24%">Module</th><th>Responsibility</th><th class="num" style="width:10%">Lines</th></tr>
+  <tr><td><code>rvi/server.py</code></td><td>Upload API, session state machine, stall/expiry monitor, verification gate, atomic writes</td><td class="num">427</td></tr>
+  <tr><td><code>rvi/analyze.py</code></td><td>ffprobe validation, full decode, PTS gap detection, duplicate and motion-jump detection, 30 FPS slot map</td><td class="num">341</td></tr>
+  <tr><td><code>rvi/client.py</code></td><td>Chunked uploader: timeouts, exponential backoff with full jitter, resume, failover, deadline</td><td class="num">269</td></tr>
+  <tr><td><code>rvi/chaos.py</code></td><td>Seeded TCP proxy that maps signal strength to bandwidth, latency, stalls, resets, blackouts and corruption</td><td class="num">213</td></tr>
+  <tr><td><code>rvi/report.py</code> · <code>testvideos.py</code></td><td>Integrity report (JSON + HTML timeline) · ground-truth videos with injected faults</td><td class="num">206</td></tr>
+  <tr><td><code>run_all.py</code></td><td>One-command evidence run: 18 scenarios plus one per real clip; rewrites <code>evidence/</code></td><td class="num">367</td></tr>
+</table>
+
+<!-- ============ TRANSFER ============ -->
+<h2><span class="n">03</span> Approach: reliable transfer</h2>
+<p>The protocol assumes the network will fail mid-transfer and makes every step safe to repeat.</p>
+<ol style="margin:2px 0 8px;padding-left:18px">
+  <li><b>Manifest first.</b> The client sends the file size, the whole-file SHA-256 and a SHA-256 for every 256 KB chunk. The upload ID is derived from the file hash, so any later process can find the same session.</li>
+  <li><b>Independent chunks.</b> Each chunk is a separate PUT with a 4 s timeout. The server hashes the chunk before writing it (temp file, fsync, rename) and refuses it with HTTP 422 on mismatch.</li>
+  <li><b>Retry with backoff.</b> Failures are retried after <code>uniform(0, min(3 s, 0.2 s·2ⁿ))</code>. Full jitter keeps retries from synchronising on a weak link.</li>
+  <li><b>Resume from the server.</b> After any failure the client asks the server which chunks it holds and sends only the rest. The server is the source of truth, so a crashed client loses nothing.</li>
+  <li><b>Failover.</b> After 3 consecutive failures the client switches to the next endpoint (Wi-Fi → cellular style).</li>
+  <li><b>Verification gate.</b> Finalize is refused (409) while chunks are missing. The assembled file must match the declared SHA-256, or the upload is <code>REJECTED</code>. With no progress for 10 s the session becomes <code>STALLED</code>; after 600 s it is <code>EXPIRED</code> and its partial data is discarded.</li>
+</ol>
+
+<table>
+  <tr><th style="width:30%">Network condition (from the brief)</th><th>Mechanism</th><th style="width:16%">Proven by</th></tr>
+  <tr><td>Low bandwidth, variable speed</td><td>Small independent chunks, so progress is never lost; proxy bandwidth = max·signal²</td><td>T2, T4</td></tr>
+  <tr><td>High latency</td><td>Proxy adds up to ~330 ms per connection at 20% signal</td><td>T2</td></tr>
+  <tr><td>Packet loss, interruptions</td><td>Connection resets mid-chunk trigger a per-chunk retry with jittered backoff</td><td>T2, T6</td></tr>
+  <tr><td>Temporary disconnection</td><td>3 s blackout, then resync and resend only the missing chunks</td><td>T3</td></tr>
+  <tr><td>Request timeouts</td><td>Every request has a timeout; the server discards half-received bodies</td><td>T4</td></tr>
+  <tr><td>Connection switching</td><td>Endpoint failover after repeated failures</td><td>T5</td></tr>
+  <tr><td>20–100% fluctuation in one transfer</td><td>Seeded profile changes every 0.5 s; the signal trace is saved with each log</td><td>T2</td></tr>
+  <tr><td>Partial / damaged / stalled upload</td><td>Finalize refused, whole-file hash, <code>STALLED</code>/<code>EXPIRED</code>, crash-safe resume</td><td>T7–T10</td></tr>
+</table>
+
+<!-- ============ FRAME INTEGRITY ============ -->
+<h2><span class="n">04</span> Approach: frame integrity analysis</h2>
+<p>Analysis runs only on <code>COMPLETE</code> files. Each detector reads a different source of evidence, and the evidence sets the confidence. A finding is never stronger than the evidence behind it.</p>
+<table>
+  <tr><th style="width:34%">Evidence source</th><th>Detects</th><th style="width:16%">Confidence</th></tr>
+  <tr><td>Container timestamps (PTS gap &gt; 1.5× nominal interval)</td><td>Missing / skipped frames, with time range and frame count</td><td><span class="pill p-good">High</span></td></tr>
+  <tr><td>Container metadata vs decoded frame count</td><td>Truncated stream, undecodable frames</td><td><span class="pill p-good">High</span></td></tr>
+  <tr><td>Decoder error log</td><td>Bitstream damage, invalid container</td><td><span class="pill p-good">High</span></td></tr>
+  <tr><td>Frame content: 32×18 gray thumbnails, mean abs diff &lt; 0.05</td><td>Duplicated / frozen frames</td><td><span class="pill p-warn">Medium</span> (low if scene is static)</td></tr>
+  <tr><td>Isolated motion jump with no timestamp gap</td><td>Possible drop hidden by a re-encode</td><td><span class="pill p-bad">Low</span> (hint only)</td></tr>
+  <tr><td>Client's pre-upload ffprobe</td><td>Shows that an anomaly existed before the transfer</td><td><span class="pill p-acc">Reference</span></td></tr>
+</table>
+<p><b>30 FPS slot map.</b> Source timestamps are mapped onto a 30 FPS grid. Each slot records its index, time and source frame, and gets one of three labels: <code>unique</code>, <code>gap_fill</code> (no source frame exists, so the gap is real) or <code>conversion_duplicate</code> (the source simply runs at a different rate). This keeps conversion artefacts out of the anomaly count, which the brief explicitly warns about.</p>
+<p><b>Cause attribution.</b> If the transfer is hash-verified and the pre-upload probe already shows the gap, the anomaly is attributed to <i>capture/encoding</i>. Decoder errors are attributed to <i>bitstream damage</i>. A transfer fault cannot reach analysis at all, because such a file never becomes <code>COMPLETE</code>.</p>
+
+<!-- ============ DECISIONS ============ -->
+<h2><span class="n">05</span> Major architecture decisions</h2>
+
+<div class="adr"><div class="h"><span class="id">AD-1</span>Hash-gated state machine; analysis only from COMPLETE</div>
+  <div class="row"><span class="k">Why</span><span>"Upload finished" is not proof. Per-chunk plus whole-file SHA-256 means an accepted file is provably identical to what the client declared.</span></div>
+  <div class="row"><span class="k">Trade-off</span><span>The client hashes the whole file before sending, which is a small one-off cost for a 30 s clip.</span></div></div>
+
+<div class="adr"><div class="h"><span class="id">AD-2</span>Server is the source of truth for resume</div>
+  <div class="row"><span class="k">Why</span><span>The upload ID is derived from the file hash and the server reports which chunks it holds. A fresh client process (after a crash or reboot) resumes with no local state. In T10 it sent only 1225 of 1737 KB.</span></div>
+  <div class="row"><span class="k">Trade-off</span><span>Uploading the same file twice maps to the same session. That is intended deduplication.</span></div></div>
+
+<div class="adr"><div class="h"><span class="id">AD-3</span>Fixed 256 KB chunks with timeout, full-jitter backoff and failover</div>
+  <div class="row"><span class="k">Why</span><span>Small chunks bound the work lost to any single failure at 20% signal. Full jitter avoids retry storms, and failover covers path changes.</span></div>
+  <div class="row"><span class="k">Trade-off</span><span>Per-request overhead on a good link. Adaptive chunk sizing is listed as future work.</span></div></div>
+
+<div class="adr"><div class="h"><span class="id">AD-4</span>Atomic, crash-safe writes</div>
+  <div class="row"><span class="k">Why</span><span>Every chunk and metadata write goes through temp file, fsync and rename, so a half-written chunk is never visible and a server crash cannot corrupt accepted data.</span></div>
+  <div class="row"><span class="k">Trade-off</span><span>One extra fsync per chunk.</span></div></div>
+
+<div class="adr"><div class="h"><span class="id">AD-5</span>Seeded, in-process chaos proxy instead of manual Wi-Fi toggling</div>
+  <div class="row"><span class="k">Why</span><span>Every network scenario is reproducible (seed 2026) and runs in CI-like conditions with no root access. The fault clock starts at the first client connection, so results do not depend on machine speed.</span></div>
+  <div class="row"><span class="k">Trade-off</span><span>Loss is emulated at the TCP level (stalls, resets, slowdowns), not as dropped IP packets. <code>tc netem</code> would add that.</span></div></div>
+
+<div class="adr"><div class="h"><span class="id">AD-6</span>Evidence-tiered findings with explicit cause</div>
+  <div class="row"><span class="k">Why</span><span>This answers the brief's technical distinction directly. Every anomaly says <i>what</i> proves it (timestamps, metadata, decoder, content), <i>how sure</i> we are, and <i>whose fault</i> it is.</span></div>
+  <div class="row"><span class="k">Trade-off</span><span>Reports are more verbose than a single verdict. The HTML timeline keeps them readable.</span></div></div>
+
+<div class="adr"><div class="h"><span class="id">AD-7</span>Zero dependencies: Python standard library + ffmpeg</div>
+  <div class="row"><span class="k">Why</span><span>The project runs anywhere ffmpeg runs, with no pip or Docker, and is easy to audit at ~1,900 lines.</span></div>
+  <div class="row"><span class="k">Trade-off</span><span>Thumbnail diffs are computed in pure Python on 32×18 frames. This is fast enough for 30 s clips.</span></div></div>
+
+<div class="adr"><div class="h"><span class="id">AD-8</span>Ground-truth test videos and real-footage tuning</div>
+  <div class="row"><span class="k">Why</span><span>Detection accuracy is <i>measured</i> on generated videos with known injected drops and freezes. Thresholds were then tuned on 7 real clips, which exposed flaws the synthetic videos could not show (see §07).</span></div>
+  <div class="row"><span class="k">Trade-off</span><span>Real clips have no ground truth, so their tests check that the pipeline is sound, not that the recording is clean.</span></div></div>
+
+<!-- ============ RESULTS ============ -->
+<h2><span class="n">06</span> Results</h2>
+<p>All numbers come from the committed evidence run (<code>evidence/SUMMARY.md</code>, seed 2026). Every transfer through the chaos proxy that was meant to succeed ended byte-perfect. Every transfer that was meant to fail accepted nothing.</p>
+
+<h3>Transfer scenarios</h3>
+<table>
+  <tr><th>ID</th><th>Scenario</th><th class="num">Time</th><th class="num">Retries</th><th class="num">Timeouts</th><th class="num">Resent</th><th>Outcome</th></tr>
+  <tr><td>T1</td><td>Stable connection (100%)</td><td class="num">1.9 s</td><td class="num">0</td><td class="num">0</td><td class="num">0 KB</td><td><span class="pill p-good">COMPLETE</span></td></tr>
+  <tr><td>T2</td><td>Fluctuating 20–100% + resets + stalls</td><td class="num">15.0 s</td><td class="num">10</td><td class="num">3</td><td class="num">640 KB</td><td><span class="pill p-good">COMPLETE</span></td></tr>
+  <tr><td>T3</td><td>3 s blackout + reconnect</td><td class="num">8.2 s</td><td class="num">6</td><td class="num">0</td><td class="num">1536 KB</td><td><span class="pill p-good">COMPLETE</span></td></tr>
+  <tr><td>T4</td><td>Stalled requests → client timeouts</td><td class="num">13.9 s</td><td class="num">5</td><td class="num">5</td><td class="num">1225 KB</td><td><span class="pill p-good">COMPLETE</span></td></tr>
+  <tr><td>T5</td><td>Path A dies → failover to path B</td><td class="num">4.9 s</td><td class="num">3</td><td class="num">0</td><td class="num">768 KB</td><td><span class="pill p-good">COMPLETE</span> 1 failover</td></tr>
+  <tr><td>T6</td><td>Bytes corrupted in transit</td><td class="num">2.6 s</td><td class="num">4</td><td class="num">0</td><td class="num">1024 KB</td><td><span class="pill p-good">COMPLETE</span> bad chunks refused</td></tr>
+  <tr><td>T7</td><td>Finalize with 4 chunks missing</td><td colspan="4" class="muted">HTTP 409 incomplete; state stays UPLOADING</td><td><span class="pill p-bad">REFUSED</span> 0 accepted</td></tr>
+  <tr><td>T8</td><td>Data altered at rest before finalize</td><td colspan="4" class="muted">HTTP 422, whole-file SHA-256 mismatch (same size)</td><td><span class="pill p-bad">REJECTED</span> 0 accepted</td></tr>
+  <tr><td>T8b</td><td>Altered chunk sent by client</td><td colspan="4" class="muted">HTTP 422 chunk_integrity_mismatch</td><td><span class="pill p-bad">REFUSED</span></td></tr>
+  <tr><td>T9</td><td>Permanent outage</td><td colspan="4" class="muted">client FAILED; server STALLED with 2/7 chunks</td><td><span class="pill p-bad">FAILED</span> 0 accepted</td></tr>
+  <tr><td>T10</td><td>New process resumes stalled upload</td><td colspan="4" class="muted">resumed; sent 1225 of 1737 KB</td><td><span class="pill p-good">COMPLETE</span></td></tr>
+</table>
+
+<div class="two avoid">
+  <div class="fig" style="margin:0">
+    <div class="t">Retries needed to finish, per scenario</div>
+    <svg viewBox="0 0 320 150" width="100%" font-family="Inter, sans-serif" font-size="10">
+      <g stroke="#dfe3e8"><line x1="40" y1="20" x2="40" y2="128"/></g>
+      <!-- scale: 10 retries = 240px -->
+      <g fill="#1f4fd1">
+        
+        <rect x="40" y="31"  width="240" height="14" rx="3"/>
+        <rect x="40" y="50"  width="144" height="14" rx="3"/>
+        <rect x="40" y="69"  width="120" height="14" rx="3"/>
+        <rect x="40" y="88"  width="72"  height="14" rx="3"/>
+        <rect x="40" y="107" width="96"  height="14" rx="3"/>
+      </g>
+      <g fill="#3d4552" text-anchor="end"><text x="34" y="23">T1</text><text x="34" y="42">T2</text><text x="34" y="61">T3</text><text x="34" y="80">T4</text><text x="34" y="99">T5</text><text x="34" y="118">T6</text></g>
+      <g fill="#14181f" font-weight="600"><text x="46" y="23">0</text><text x="286" y="42">10</text><text x="190" y="61">6</text><text x="166" y="80">5</text><text x="118" y="99">3</text><text x="142" y="118">4</text></g>
+      <text x="40" y="145" fill="#6b7482" font-size="9">all six end COMPLETE and byte-perfect</text>
+    </svg>
+  </div>
+  <div class="fig" style="margin:0">
+    <div class="t">Data resent (KB of a ~1.7 MB file)</div>
+    <svg viewBox="0 0 320 150" width="100%" font-family="Inter, sans-serif" font-size="10">
+      <g stroke="#dfe3e8"><line x1="40" y1="20" x2="40" y2="128"/></g>
+      <!-- scale: 1536 KB = 220px -->
+      <g fill="#1f4fd1">
+        <rect x="40" y="31"  width="89.4"  height="14" rx="3"/>
+        <rect x="40" y="50"  width="220"   height="14" rx="3"/>
+        <rect x="40" y="69"  width="175.5" height="14" rx="3"/>
+        <rect x="40" y="88"  width="110"   height="14" rx="3"/>
+        <rect x="40" y="107" width="146.7" height="14" rx="3"/>
+      </g>
+      <g fill="#3d4552" text-anchor="end"><text x="34" y="23">T1</text><text x="34" y="42">T2</text><text x="34" y="61">T3</text><text x="34" y="80">T4</text><text x="34" y="99">T5</text><text x="34" y="118">T6</text></g>
+      <g fill="#14181f" font-weight="600"><text x="46" y="23">0</text><text x="135" y="42">640</text><text x="266" y="61">1536</text><text x="221" y="80">1225</text><text x="156" y="99">768</text><text x="193" y="118">1024</text></g>
+      <text x="40" y="145" fill="#6b7482" font-size="9">only failed chunks are resent, never the whole file</text>
+    </svg>
+  </div>
+</div>
+
+<div class="avoid"><h3 style="margin-top:14px">Video scenarios (ground truth known)</h3>
+<table>
+  <tr><th>ID</th><th>Injected fault</th><th>Verdict</th><th>Measured</th></tr>
+  <tr><td>V1</td><td>None (clean 30 s / 30 FPS)</td><td><span class="pill p-good">NO_ANOMALIES</span></td><td>0 anomalies, 0 false alarms</td></tr>
+  <tr><td>V2</td><td>4 drop runs (11 frames), timestamps kept</td><td><span class="pill p-bad">ANOMALIES</span></td><td>4/4 gaps located, 0 false, 0 missed</td></tr>
+  <tr><td>V3</td><td>3 frozen / duplicated runs</td><td><span class="pill p-bad">ANOMALIES</span></td><td>3/3 runs located, 0 false, 0 missed</td></tr>
+  <tr><td>V4</td><td>Drops, then re-encoded to constant rate</td><td><span class="pill p-warn">SUSPECTED</span></td><td>No timestamp evidence (as expected); 4 low-confidence hints only. We deliberately do not claim certainty here.</td></tr>
+  <tr><td>V5</td><td>Bitstream damaged before upload</td><td><span class="pill p-bad">ANOMALIES</span></td><td>Transfer COMPLETE; validation DEGRADED, 45 decoder errors, cause = bitstream</td></tr>
+  <tr><td>V6</td><td>Truncated file</td><td><span class="pill p-bad">ANOMALIES</span></td><td>truncated_stream: 360 frames missing from 18.0 s</td></tr>
+  <tr><td>V7</td><td>Random bytes named <code>.mp4</code></td><td><span class="pill p-bad">INVALID_VIDEO</span></td><td>Not a parseable container; no crash</td></tr>
+</table></div>
+
+<div class="avoid"><h3>Real footage (no ground truth)</h3>
+<p>Seven real clips were each uploaded through the fluctuating proxy: three stock clips (R1–R3) and four of my own phone recordings (R4–R7). All seven arrived byte-perfect and decoded cleanly.</p>
+<table>
+  <tr><th>ID</th><th>Clip</th><th class="num">Frames</th><th class="num">Duration</th><th>Verdict</th><th>Confirmed findings (timestamp evidence)</th></tr>
+  <tr><td>R1</td><td>Stock 1440×2560</td><td class="num">906</td><td class="num">30.2 s</td><td><span class="pill p-good">NO_ANOMALIES</span></td><td>—</td></tr>
+  <tr><td>R2</td><td>Stock 1080×1920</td><td class="num">336</td><td class="num">11.2 s</td><td><span class="pill p-warn">SUSPECTED</span></td><td>0 confirmed; flagged <code>duration_out_of_spec</code></td></tr>
+  <tr><td>R3</td><td>Stock 720×1280</td><td class="num">913</td><td class="num">30.4 s</td><td><span class="pill p-warn">SUSPECTED</span></td><td>0 confirmed; 2 low-confidence hints</td></tr>
+  <tr><td>R4</td><td>Phone (VFR)</td><td class="num">922</td><td class="num">30.8 s</td><td><span class="pill p-bad">ANOMALIES</span></td><td>2 single-frame drops (11.57 s, 11.83 s)</td></tr>
+  <tr><td>R5</td><td>Phone (VFR)</td><td class="num">892</td><td class="num">31.4 s</td><td><span class="pill p-bad">ANOMALIES</span></td><td><b>49-frame hole, 1.67–3.30 s</b>; 1 single drop at 19.74 s</td></tr>
+  <tr><td>R6</td><td>Phone</td><td class="num">952</td><td class="num">31.7 s</td><td><span class="pill p-good">NO_ANOMALIES</span></td><td>—</td></tr>
+  <tr><td>R7</td><td>Phone (VFR)</td><td class="num">931</td><td class="num">31.3 s</td><td><span class="pill p-bad">ANOMALIES</span></td><td>7 single-frame drops (2.61 s … 28.26 s)</td></tr>
+</table></div>
+<p class="muted">Because every transfer was hash-verified, the drops in R4, R5 and R7 are attributed to capture/encoding on the phone, not to the network. This is the brief's distinction applied to real data.</p>
+
+<!-- ============ TUNING ============ -->
+<div class="avoid"><h2><span class="n">07</span> Tuned on reality</h2>
+<p>Synthetic videos passed from the start. Real footage exposed three flaws, and all three were fixed with measured justification:</p>
+<table>
+  <tr><th style="width:20%">Threshold</th><th style="width:17%">Before → After</th><th>Evidence that drove the change</th></tr>
+  <tr><td>Duplicate frame (mean abs gray diff, 0–255)</td><td>0.20 → <b>0.05</b></td><td>Sensor and encoder noise keep consecutive real frames ≥ ~0.08 apart even in a still scene, while true repeats measure ~0.002. The old value raised 90 false duplicates on one static clip; the new one raises 0 and still finds every injected freeze.</td></tr>
+  <tr><td>Motion jump</td><td>any 1.75–6× spike → <b>isolated</b> spike</td><td>A hidden drop is one sudden jump. Several elevated differences in a row are genuine motion. Requiring both neighbours to stay below 1.4× the local median cut false hints on real clips from 12 to 2.</td></tr>
+  <tr><td>Decoder errors</td><td>all ffmpeg errors → <b>source only</b></td><td>Irregular phone timestamps made ffmpeg's <i>output</i> muxer warn while writing thumbnails, which marked a good phone clip DEGRADED. These lines are now kept as pipeline notes.</td></tr>
+</table></div>
+
+<!-- ============ LIMITATIONS ============ -->
+<h2><span class="n">08</span> Limitations</h2>
+<ul>
+  <li>A byte-perfect transfer cannot prove the original recording had no dropped frames. This is stated in every report.</li>
+  <li>If frames were dropped and the video was then re-encoded with regenerated constant-rate timestamps, the timestamp evidence is gone. Only a low-confidence motion hint remains (V4); confirming it needs a capture-side reference.</li>
+  <li>Duplicate detection cannot tell a frozen capture from a truly still scene, so confidence is lowered for static scenes.</li>
+  <li>The motion-jump hint overlaps with real motion: a hidden one-frame drop scores 1.9× local motion, and handheld motion in real clips reaches ~1.8×. That is why it is never reported as a confirmed anomaly.</li>
+  <li>The chaos proxy emulates loss at TCP level (stalls, resets, slowdowns), not as individual dropped IP packets.</li>
+  <li>Detection accuracy is measured on synthetic ground truth. Real clips show only that the pipeline is sound.</li>
+  <li>No authentication or TLS: this is a challenge prototype, not a hardened service.</li>
+</ul>
+
+<h2><span class="n">09</span> Future work</h2>
+<ul>
+  <li>Adaptive chunk size driven by measured throughput, so a good link pays less per-request overhead.</li>
+  <li>Localise decoder errors to timestamps in the corrupt-bitstream case.</li>
+  <li>A server-restart-mid-upload scenario, and packet-level loss via <code>tc netem</code>.</li>
+  <li>Capture-side frame counters or signed timestamps from the recording app, to close the V4 gap.</li>
+  <li>TLS, authentication and object-storage backing for production use.</li>
+</ul>
+
+<div class="avoid"><h2><span class="n">10</span> Reproduce</h2>
+<div class="fig" style="font-size:8.8pt">
+<div class="mono" style="background:none;padding:0;line-height:1.7;white-space:pre">python run_all.py                     # all scenarios, rewrites evidence/  (25/25)
+python -m rvi.server --port 8000      # backend
+python -m rvi.chaos  --listen 9000 --upstream 127.0.0.1:8000   # bad network
+python -m rvi.client test_videos/dropped_vfr.mp4 --server http://127.0.0.1:9000</div>
+<div class="cap">Requires Python 3.9+ and ffmpeg/ffprobe on PATH. Evidence: <code>evidence/SUMMARY.md</code>, <code>evidence/transfer_logs/</code>, <code>evidence/reports/*.html</code>.</div>
+</div></div>
+
+<footer>
+  <span>Virendra Singh · <a href="https://virendrasingh-ai-ml.vercel.app/">virendrasingh-ai-ml.vercel.app</a> · <a href="https://github.com/VirensinIITBHU">github.com/VirensinIITBHU</a></span>
+  <span>Confluentia 2026 · nSEPIA Technical Challenge</span>
+</footer>
+
+</body>
+</html>
