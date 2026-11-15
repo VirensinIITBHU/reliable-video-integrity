@@ -12,7 +12,8 @@ stating the evidence behind every conclusion.
 ## Quick start
 
 ```bash
-python run_all.py          # runs all 18 scenarios (~80 s), writes ./evidence/
+python run_all.py          # 18 scenarios (~90 s), writes ./evidence/
+                           # + one extra scenario per real clip in ./samples/
 ```
 
 Manual three-terminal demo:
@@ -91,11 +92,29 @@ reported as warnings, **not** anomalies.
 ## Test evidence
 
 `python run_all.py` → [`evidence/SUMMARY.md`](evidence/SUMMARY.md), per-scenario
-transfer logs in `evidence/transfer_logs/`, and sample integrity reports in
-`evidence/reports/` (open `dropped_vfr.report.html`).
+transfer logs in `evidence/transfer_logs/` (each with the signal-strength trace
+the proxy applied), and sample integrity reports in `evidence/reports/`
+(open `dropped_vfr.report.html`, or `12943168_1440_2560_30fps.report.html` for real footage).
+
+The committed evidence is a 21/21 run: 11 transfer scenarios (T1–T10, T8b),
+7 ground-truth video scenarios (V1–V7) and 3 real clips (R1–R3).
 
 Detection is measured against generated videos with known injected faults:
 4/4 dropped-frame gaps and 3/3 duplicate runs located, 0 false alarms, 0 on the clean video.
+
+**Real footage (R1–R3).** Three real 30 FPS camera clips (1440×2560 / 30.2 s / 92 MB,
+720×1280 / 30.4 s, 1080×1920 / 11.2 s) were each uploaded through the fluctuating
+proxy and analysed. All three transferred byte-perfect and decoded cleanly with
+**0 confirmed anomalies**. The 11.2 s clip is correctly flagged `duration_out_of_spec`.
+The clips are third-party footage and are not committed (`samples/` is git-ignored);
+their reports are in `evidence/reports/`. Put any `.mp4` in `samples/` to repeat this.
+
+Real footage changed two thresholds that synthetic video could not reveal:
+
+| Threshold | Before | After | Why |
+|---|---|---|---|
+| Duplicate frame (mean abs gray diff, 0–255) | 0.20 | 0.05 | Sensor + encoder noise keeps consecutive real frames ≥ ~0.08 apart even in a still scene; truly repeated frames measure ~0.002. The old value raised 90 false duplicates on a static real clip. |
+| Motion jump | any 1.75–6× spike | must also be **isolated** (both neighbours < 1.4× local median) | A hidden drop is one sudden jump; several elevated differences in a row are genuine motion. Cut false hints on real clips from 12 to 2. |
 
 ## Limitations
 
@@ -106,5 +125,13 @@ Detection is measured against generated videos with known injected faults:
 - Duplicate detection cannot separate a frozen capture from a truly still scene.
 - The chaos proxy works on TCP streams: packet loss appears as stalls, resets and
   slowdowns, not as individually dropped IP packets (`tc netem` would add that).
-- Detection accuracy is measured on synthetic video; thresholds are not yet tuned on real camera footage.
+- Detection accuracy (true / false positives) is measured on synthetic video with known faults.
+  On real footage there is no ground truth, so the real clips show only that clean recordings
+  produce no confirmed anomalies.
+- The low-confidence motion-jump hint overlaps with real motion: a hidden one-frame drop in the
+  synthetic test scores 1.9× local motion, ordinary handheld motion in real clips up to ~1.8×.
+  That is why two real clips get `SUSPECTED_ANOMALIES` (low-confidence hints only) and why the
+  hint is never reported as a confirmed anomaly.
+- The simulated fault timeline starts at the first client connection, so results do not depend on
+  how fast the machine hashes the file; exact retry counts still vary slightly between machines.
 - No authentication or TLS: this is a challenge prototype, not a hardened service.

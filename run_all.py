@@ -2,6 +2,7 @@
 """End-to-end evidence run: every transfer and integrity scenario, one command.
 
     python run_all.py            # full run, writes ./evidence/
+                                 # (+ section C for any real clips placed in ./samples/)
     python run_all.py --quick    # skip the slowest network scenarios
 
 Each scenario starts its own backend (fresh storage) and, where needed, a seeded
@@ -26,6 +27,7 @@ from rvi.server import make_server
 ROOT = os.path.dirname(os.path.abspath(__file__))
 EVID = os.path.join(ROOT, "evidence")
 VID = os.path.join(ROOT, "test_videos")
+SAMPLES = os.path.join(ROOT, "samples")   # optional: real footage, not shipped in the repo
 SEED = 2026
 RESULTS = []
 
@@ -63,6 +65,12 @@ class Env:
         self.httpd.shutdown()
         self.httpd.server_close()
         shutil.rmtree(self.data, ignore_errors=True)
+
+
+def save_log(res, name):
+    """Write a transfer log with repo-relative paths (no local directory names)."""
+    res = dict(res, file=os.path.relpath(res["file"], ROOT))
+    json.dump(res, open(os.path.join(EVID, "transfer_logs", name), "w"), indent=2)
 
 
 def raw(url, method, path, body=None):
@@ -116,7 +124,7 @@ def transfer_case(sid, name, expected, proxy_kw=None, second_kw=None, client_kw=
             st["failovers"], st["bytes_resent"] // 1024)
         res["proxy_stats"] = [p.stats for p in pxs]
         res["signal_trace"] = [p.trace[:400] for p in pxs]
-        json.dump(res, open(os.path.join(EVID, "transfer_logs", sid + ".json"), "w"), indent=2)
+        save_log(res, sid + ".json")
         return record(sid, name, expected, ok, obs)
     finally:
         env.close()
@@ -176,7 +184,7 @@ def t_outage():
         _, st = raw(env.url, "GET", "/uploads/" + res["upload_id"])
         ok = (res["final_status"] == "FAILED" and st["state"] == "STALLED" and not env.verified_files()
               and 0 < st["received_chunks"] < st["total_chunks"])
-        json.dump(res, open(os.path.join(EVID, "transfer_logs", "T9.json"), "w"), indent=2)
+        save_log(res, "T9.json")
         record("T9", "Network never returns (permanent outage)", "client FAILED, server STALLED, nothing accepted", ok,
                "client=%s, server=%s with %d/%d chunks, accepted files=%d" % (
                    res["final_status"], st["state"], st["received_chunks"], st["total_chunks"], len(env.verified_files())))
@@ -193,15 +201,15 @@ def t_outage():
         env.close()
 
 
-def video_case(sid, file, name, expected, check):
+def video_case(sid, file, name, expected, check, max_bw=4_000_000, max_seconds=90.0):
     env = Env(analyze=True)
     try:
-        px, u = env.proxy(profile=Profile.fluctuating(SEED, lo=0.5), max_bw=4_000_000, reset_rate=0.2)
-        up = Uploader([u], timeout=2.0, max_seconds=90.0, seed=SEED)
+        px, u = env.proxy(profile=Profile.fluctuating(SEED, lo=0.5), max_bw=max_bw, reset_rate=0.2)
+        up = Uploader([u], timeout=2.0, max_seconds=max_seconds, seed=SEED)
         res = up.upload(os.path.join(VID, file))
         rep = up.wait_report(res["upload_id"]) if res["final_status"] == "COMPLETE" else {}
         ok, obs, extra = check(res, rep)
-        stem = file.rsplit(".", 1)[0]
+        stem = os.path.basename(file).rsplit(".", 1)[0]
         json.dump(rep, open(os.path.join(EVID, "reports", stem + ".report.json"), "w"), indent=2)
         hp = os.path.join(env.data, "sessions", res.get("upload_id", "x"), "report.html")
         if os.path.exists(hp):
@@ -239,8 +247,11 @@ def main():
     transfer_case("T1", "Stable connection (100%)", "COMPLETE, no retries", {"profile": Profile.constant(1.0)},
                   check=lambda r, p: r["stats"]["chunk_retries"] == 0)
     transfer_case("T2", "Fluctuating signal 20%-100% + resets + stalls", "COMPLETE despite failures",
-                  {"profile": Profile.fluctuating(SEED), "max_bw": 2_500_000, "stall_rate": 0.3, "reset_rate": 0.5},
-                  check=lambda r, p: r["stats"]["chunk_retries"] > 0)
+                  {"profile": Profile.fluctuating(SEED), "max_bw": 2_500_000, "stall_rate": 0.4, "reset_rate": 0.8,
+                   "fault_window": 50_000},
+                  client_kw={"chunk_size": 64 * 1024},  # more requests -> more exposure to the bad link
+                  check=lambda r, p: (r["stats"]["chunk_retries"] >= 3 and p[0].stats["resets"] > 0
+                                      and min(x[1] for x in p[0].trace) <= 0.35))
     transfer_case("T3", "Temporary disconnection (3 s blackout) + reconnect", "COMPLETE after reconnect",
                   {"profile": Profile([(1.0, 1.0), (3.0, 0.0), (999, 1.0)], loop=False), "max_bw": 500_000},
                   check=lambda r, p: p[0].stats["blackout_drops"] > 0 and r["stats"]["request_failures"] > 0)
@@ -311,6 +322,27 @@ def main():
                "transfer OK, decode errors reported", corrupt)
     video_case("V6", "truncated.mp4", "Truncated video file", "transfer OK, truncation reported", truncated)
     video_case("V7", "not_a_video.mp4", "Invalid file (random bytes named .mp4)", "INVALID_VIDEO, no crash", invalid)
+
+    real = sorted(f for f in os.listdir(SAMPLES) if f.lower().endswith((".mp4", ".mov"))) if os.path.isdir(SAMPLES) else []
+    if real:
+        print("\nC. Real footage from ./samples (uploaded over a fluctuating link)")
+
+        def real_check(res, rep):
+            v = rep.get("validation", {})
+            strong = [x for x in rep.get("anomalies", []) if x["confidence"] != "low"]
+            weak = [x for x in rep.get("anomalies", []) if x["confidence"] == "low"]
+            t = rep.get("timing", {})
+            return (v.get("status") == "VALID" and not strong,
+                    "validation=%s, %s frames at %.2f FPS over %.1fs, confirmed anomalies=%d, low-confidence hints=%d, warnings=%s" % (
+                        v.get("status"), (rep.get("decode") or {}).get("frames_decoded"), t.get("nominal_fps", 0),
+                        t.get("span_seconds", 0), len(strong), len(weak),
+                        [w["type"] for w in rep.get("warnings", [])] or "none"),
+                    {"retries": res["stats"]["chunk_retries"], "size_bytes": res["size"]})
+
+        for i, f in enumerate(real, 1):
+            video_case("R%d" % i, os.path.join(SAMPLES, f), "Real clip %s" % f,
+                       "transfer OK, valid video, no confirmed anomalies", real_check,
+                       max_bw=12_000_000, max_seconds=300.0)
 
     passed = sum(r["pass"] for r in RESULTS)
     json.dump({"seed": SEED, "results": RESULTS}, open(os.path.join(EVID, "results.json"), "w"), indent=2)

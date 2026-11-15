@@ -1,7 +1,9 @@
 """Network chaos proxy: a seeded TCP proxy that emulates 20%-100% signal strength.
 
 It sits between client and backend. A `Profile` gives the signal strength at
-time t (seconds since the proxy started); strength is mapped to impairments:
+time t (seconds since the FIRST client connection, so a scenario's timeline does
+not depend on how long the client spends hashing/probing before it connects);
+strength is mapped to impairments:
 
     bandwidth   = max_bw * strength^2          (weak signal -> much lower throughput)
     latency     = base + (1 - strength) * 400 ms per connection
@@ -51,7 +53,7 @@ class Profile:
 class ChaosProxy:
     def __init__(self, listen_port, upstream, profile=None, seed=0, max_bw=3_000_000,
                  stall_rate=0.0, reset_rate=0.0, corrupt_rate=0.0, stall_seconds=30.0,
-                 host="127.0.0.1"):
+                 fault_window=200_000, host="127.0.0.1"):
         self.host = host
         self.port = listen_port
         self.upstream = upstream  # (host, port)
@@ -63,7 +65,8 @@ class ChaosProxy:
         self.reset_rate = reset_rate
         self.corrupt_rate = corrupt_rate
         self.stall_seconds = stall_seconds
-        self.t0 = time.time()
+        self.fault_window = fault_window  # a planned stall/reset fires within this many upload bytes
+        self.t0 = None  # profile clock; armed by the first client connection
         self.stats = {"connections": 0, "blackout_drops": 0, "stalls": 0, "resets": 0,
                       "corrupted_bytes": 0, "bytes_up": 0, "bytes_down": 0}
         self.trace = []  # (t, strength) samples for the evidence log
@@ -77,7 +80,6 @@ class ChaosProxy:
         self._thread = threading.Thread(target=self._accept, daemon=True)
 
     def start(self):
-        self.t0 = time.time()
         self._thread.start()
         return self
 
@@ -88,8 +90,11 @@ class ChaosProxy:
         except OSError:
             pass
 
+    def elapsed(self):
+        return time.time() - self.t0 if self.t0 is not None else 0.0
+
     def strength(self):
-        return self.profile.strength(time.time() - self.t0)
+        return self.profile.strength(self.elapsed())
 
     def _rand(self):
         with self.rng_lock:
@@ -103,12 +108,14 @@ class ChaosProxy:
                 continue
             except OSError:
                 return
+            if self.t0 is None:
+                self.t0 = time.time()
             threading.Thread(target=self._serve, args=(c,), daemon=True).start()
 
     def _serve(self, c):
         self.stats["connections"] += 1
         s = self.strength()
-        self.trace.append((round(time.time() - self.t0, 2), s))
+        self.trace.append((round(self.elapsed(), 2), s))
         if s <= 0.0:  # blackout: the network is simply gone
             self.stats["blackout_drops"] += 1
             c.close()
@@ -117,9 +124,9 @@ class ChaosProxy:
         time.sleep(0.01 + weak * 0.4)  # latency grows as the signal weakens
         plan = {"stall_at": None, "reset_at": None}
         if self._rand() < self.stall_rate * weak:
-            plan["stall_at"] = int(self._rand() * 200_000)
+            plan["stall_at"] = int(self._rand() * self.fault_window)
         elif self._rand() < self.reset_rate * weak:
-            plan["reset_at"] = int(self._rand() * 200_000)
+            plan["reset_at"] = int(self._rand() * self.fault_window)
         try:
             u = socket.create_connection(self.upstream, timeout=5)
         except OSError:

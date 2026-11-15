@@ -4,3 +4,7 @@ test_videos/
 server_data/
 *.assembling
 .DS_Store
+# real footage: large, third-party; drop your own clips here to run section C
+samples/
+# challenge brief (organiser document, not part of the submission)
+*.pdf

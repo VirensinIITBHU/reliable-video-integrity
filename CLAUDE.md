@@ -28,7 +28,7 @@ skipped, duplicated or abnormal frames and produce an integrity report.
 - Keep honest limitations in the README; do not overclaim detection ability.
 
 ## Commands
-- `python run_all.py` : all 18 scenarios (~80 s), rewrites `evidence/`
+- `python run_all.py` : 18 scenarios + one per clip in `samples/` (~4 min with the 3 clips), rewrites `evidence/`
 - `python run_all.py --quick` : skips the slowest network scenario
 - `python -m rvi.server --port 8000` : backend
 - `python -m rvi.chaos --listen 9000 --upstream 127.0.0.1:8000` : bad network
@@ -49,13 +49,12 @@ skipped, duplicated or abnormal frames and produce an integrity report.
 - `run_all.py` : scenarios T1-T10 (transfer) and V1-V7 (video); `evidence/` is committed
 
 ## Status
-Baseline complete and pushed; 18/18 scenarios pass (run twice).
+Baseline complete and pushed. 21/21 pass with the 3 real clips in `samples/` (git-ignored).
+Done: real-footage tuning (DUP_MAD 0.05, isolated motion jumps), harsher T2, proxy fault
+clock armed on first connection (fixed T9/T10 timing on fast/slow machines).
 
 ## Known gaps / next improvements, in priority order
-1. Test on a real 30 s phone video; tune DUP_MAD / JUMP_MIN thresholds if needed
-   (all accuracy numbers so far are from synthetic ffmpeg `testsrc2` clips).
-2. Scenario T2 (fluctuating 20-100%) only triggers ~1 retry: make it harsher and
-   log the signal-strength trace alongside throughput in the evidence.
+1. Optional: a clip recorded on an actual phone (current real clips are stock footage).
 3. View `evidence/reports/*.html` in a browser and polish; never visually checked.
 4. Localise decoder errors to timestamps in the corrupt-bitstream case.
 5. Optional: adaptive chunk size by measured throughput; server-restart-mid-upload

@@ -22,7 +22,10 @@ import subprocess
 TARGET_FPS = 30
 EXPECTED_DURATION = 30.0
 TW, TH = 32, 18                 # thumbnail size used for content comparison
-DUP_MAD = 0.20                  # mean abs gray-level difference below this = duplicate
+DUP_MAD = 0.05                  # mean abs gray-level diff (0-255) below this = duplicate.
+                                # Real camera footage never goes below ~0.08 (sensor + encoder
+                                # noise); truly repeated frames measure ~0.002.
+ISOLATION = 1.4                 # motion-jump neighbours must stay below this x local median
 JUMP_MIN, JUMP_MAX = 1.75, 6.0   # motion jump vs local median (weak evidence)
 GAP_FACTOR = 1.5                # PTS delta > 1.5x nominal interval = missing frame(s)
 
@@ -273,7 +276,11 @@ def analyze_video(path, source_manifest=None):
         if local < 0.3 or (i + 1) in gap_frames:
             continue
         ratio = m / local
-        if JUMP_MIN <= ratio <= JUMP_MAX:
+        # A drop hidden by a constant-rate re-encode shows up as ONE isolated spike;
+        # several elevated differences in a row are a burst of genuine motion.
+        nbr = [mads[j] for j in (i - 1, i + 1) if 0 <= j < len(mads)]
+        isolated = all(x < ISOLATION * local for x in nbr)
+        if JUMP_MIN <= ratio <= JUMP_MAX and isolated:
             t = pts[min(i + 1, len(pts) - 1)]
             res["anomalies"].append({
                 "type": "motion_discontinuity", "count": max(1, int(round(ratio)) - 1),
